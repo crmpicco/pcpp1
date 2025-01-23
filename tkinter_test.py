@@ -1,6 +1,7 @@
 import sys
 import tkinter as tk
 import os
+from tkinter import PhotoImage
 
 # grab the API key from the environment variables
 football_api_key = os.environ.get("FOOTBALL_API_KEY")
@@ -11,6 +12,12 @@ if not football_api_key:
 # Create the main window
 root = tk.Tk()
 root.title("Basic Tkinter Window")
+
+# configure the background image
+background_image = PhotoImage(file="rangers-bg.png")
+canvas = tk.Canvas(root, width=800, height=800)
+canvas.pack(fill="both", expand=True)
+canvas.create_image(0, 0, image=background_image, anchor="nw")
 
 # Get the screen dimensions
 screen_width = root.winfo_screenwidth()
