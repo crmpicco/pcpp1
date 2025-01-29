@@ -10,18 +10,17 @@ if not football_api_key:
     sys.exit(1)
 
 # Create the main window
-root = tk.Tk()
-root.title("Basic Tkinter Window")
+root_window = tk.Tk()
+root_window.title("Basic Tkinter Window")
 
 # configure the background image
 background_image = PhotoImage(file="rangers-bg.png")
-canvas = tk.Canvas(root, width=800, height=800)
-canvas.pack(fill="both", expand=True)
-canvas.create_image(0, 0, image=background_image, anchor="nw")
+background_label = tk.Label(root_window, image=background_image)
+background_label.place(relwidth=1, relheight=1)  # Make the label fill the entire window
 
 # Get the screen dimensions
-screen_width = root.winfo_screenwidth()
-screen_height = root.winfo_screenheight()
+screen_width = root_window.winfo_screenwidth()
+screen_height = root_window.winfo_screenheight()
 
 window_width = 800
 window_height = 800
@@ -30,15 +29,29 @@ window_height = 800
 center_x = int((screen_width / 2) - (window_width / 2))
 center_y = int((screen_height / 2) - (window_height / 2))
 
-# position the window on the center of the screen
-root.geometry(f"{window_width}x{window_height}+{center_x}+{center_y}")
+# position the window in the center of the screen
+root_window.geometry(f"{window_width}x{window_height}+{center_x}+{center_y}")
 
 # disable both horizontal and vertical resizing
-root.resizable(False, False)
+root_window.resizable(False, False)
 
-# Create a button
-button = tk.Button(root, text="Click Me again", command=lambda: print("Button clicked!"))
-button.pack(pady=20)
+switch = tk.IntVar()
+switch.set(0)
+
+check_button = tk.Checkbutton(root_window, text="Check button", variable=switch)
+check_button.pack()
+
+# Create a close button which will destroy the window entirely
+close_button = tk.Button(
+    root_window,
+    text="Close",
+    command=root_window.destroy,
+    bg=root_window.cget("background"),
+    bd=0,
+    highlightthickness=0,
+    activebackground=root_window.cget("background")
+)
+close_button.pack(side="bottom", pady=20)
 
 # Run the Tkinter event loop
-root.mainloop()
+root_window.mainloop()
