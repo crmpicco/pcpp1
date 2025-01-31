@@ -8,16 +8,16 @@ Notes for the Python PCPP1 course and exam
 ### Widgets
 - [ ] Label
 - [x] Button
-- [ ] Entry
+- [x] Entry
 - [ ] Text
 - [ ] Frame
 - [ ] Canvas
 
 ### Geometry Managers
-- [ ] pack
-- [ ] grid
+- [x] pack
+- [x] grid
 - [ ] place
 
 ### Events
-- [ ] bind
+- [x] bind
 - [ ] unbind 

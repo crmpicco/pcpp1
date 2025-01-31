@@ -11,7 +11,7 @@ def get_rangers_players(football_api_key):
 		"x-rapidapi-host": "v3.football.api-sports.io"
 	}
 
-	response = requests.get(url, headers=headers, params=querystring)
+	# response = requests.get(url, headers=headers, params=querystring)
 
 	print(response.json())
 

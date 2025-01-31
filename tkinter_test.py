@@ -45,15 +45,43 @@ root_window.geometry(f"{window_width}x{window_height}+{center_x}+{center_y}")
 # disable both horizontal and vertical resizing
 root_window.resizable(False, False)
 
+grid_frame = tk.Frame(root_window)
+grid_frame.grid(row=0, column=0, padx=10, pady=10)
+
+
+def team_entry_widget_focus_in(event):
+    if team_entry.get() == "Enter team name":
+        team_entry.delete(0, tk.END)
+        team_entry.config(fg="white")
+
+def team_entry_widget_focus_out(event):
+    if team_entry.get() == "":
+        team_entry.insert(0, "Enter team name")
+        team_entry.config(fg="grey")
+
+# grid layout
+team_entry = tk.Entry(grid_frame, fg="grey")
+team_entry.insert(0, "Enter team name")  # some placeholder text
+team_entry.bind("<FocusIn>", team_entry_widget_focus_in)
+team_entry.bind("<FocusOut>", team_entry_widget_focus_out)
+team_entry.grid(row=0, column=1, padx=10, pady=10)
+
+# Search button
+search_button = tk.Button(grid_frame, text="Search for result")
+search_button.grid(row=1, column=1, padx=10, pady=10)
+
 switch = tk.IntVar()
 switch.set(0)
 
-check_button = tk.Checkbutton(root_window, text="Check button", variable=switch)
+pack_frame = tk.Frame(root_window)
+pack_frame.grid(row=3, column=1, padx=10, pady=10)
+
+check_button = tk.Checkbutton(pack_frame, text="Check button", variable=switch)
 check_button.pack()
 
 # Create a close button which will destroy the window entirely
 close_button = tk.Button(
-    root_window,
+    pack_frame,
     text="Close",
     command=root_window.destroy,
     bg=root_window.cget("background"),
