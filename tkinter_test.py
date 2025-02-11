@@ -26,7 +26,7 @@ root_window.title("Rangers FC fixtures")
 # configure the background image
 background_image = PhotoImage(file="rangers-bg.png")
 background_label = tk.Label(root_window, image=background_image)
-background_label.place(relwidth=1, relheight=1)  # Make the label fill the entire window
+background_label.place(relwidth=1, relheight=1)  # Make the label fill the entire window # noqa
 
 # Get the screen dimensions
 screen_width = root_window.winfo_screenwidth()
@@ -54,10 +54,12 @@ def team_entry_widget_focus_in(event):
         team_entry.delete(0, tk.END)
         team_entry.config(fg="white")
 
+
 def team_entry_widget_focus_out(event):
     if team_entry.get() == "":
         team_entry.insert(0, "Enter team name")
         team_entry.config(fg="grey")
+
 
 # grid layout
 team_entry = tk.Entry(grid_frame, fg="grey")

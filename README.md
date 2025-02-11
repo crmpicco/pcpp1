@@ -1,5 +1,7 @@
 # PCPP1 Notes
 
+![pycodestyle](https://github.com/crmpicco/pcpp1_notes/actions/workflows/pycodestyle.yml/badge.svg)
+
 Notes for the Python PCPP1 course and exam
 
 ## Tkinter
