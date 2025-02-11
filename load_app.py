@@ -2,7 +2,7 @@ import sys
 import tkinter as tk
 import os
 from tkinter import PhotoImage
-from football_api_lookup import get_rangers_players
+from football_api_lookup import FootballApi
 
 # grab the API key from the environment variables
 football_api_key = os.environ.get("FOOTBALL_API_KEY")
@@ -11,9 +11,10 @@ if not football_api_key:
     sys.exit(1)
 
 # Get the Rangers players
-rangers_players = get_rangers_players(football_api_key)
-if rangers_players and "response" in rangers_players:
-    print(rangers_players["response"])
+football_api_lookup = FootballApi(football_api_key)
+rangers_fixtures = football_api_lookup.get_fixtures(257, 2021)
+if rangers_fixtures and "response" in rangers_fixtures:
+    print(rangers_fixtures["response"])
     # for player in rangers_players["response"]:
     #     print(player["player"]["name"])  # Print player name
 else:
@@ -22,6 +23,9 @@ else:
 # Create the main window
 root_window = tk.Tk()
 root_window.title("Rangers FC fixtures")
+
+header = tk.Label(root_window, text="Search Rangers FC fixtures", font=("Helvetica", 24))
+header.place(relx=0.5, rely=0.1, anchor="center")
 
 # configure the background image
 background_image = PhotoImage(file="rangers-bg.png")

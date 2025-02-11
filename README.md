@@ -5,13 +5,14 @@
 Notes for the Python PCPP1 course and exam
 
 ## Tkinter
+### Installation
 `brew install python-tk@3.12` # Install Tkinter on macOS
 
 ### Widgets
 - [ ] Label
 - [x] Button
 - [x] Entry
-- [ ] Text
+- [x] ~~Text~~
 - [ ] Frame
 - [ ] Canvas
 

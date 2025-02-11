@@ -1,16 +1,19 @@
 import requests
 
 
-def get_rangers_players(football_api_key):
-    url = "https://v3.football.api-sports.io/fixtures"
+class FootballApi:
+    BASE_URL = "https://v3.football.api-sports.io"
 
-    # the free tier of the API is restricted to the season 2021 onwards
-    querystring = {"team": "257", "season": "2021"}
-    headers = {
-        "x-rapidapi-key": football_api_key,
-        "x-rapidapi-host": "v3.football.api-sports.io"
-    }
+    def __init__(self, api_key):
+        self.api_key = api_key
 
-    # response = requests.get(url, headers=headers, params=querystring)
-    print(response.json())
-    return response.json()
+    def get_fixtures(self, team_id, season):
+        url = f"{self.BASE_URL}/fixtures"
+        querystring = {"team": team_id, "season": season}
+        headers = {
+            "x-rapidapi-key": self.api_key,
+            "x-rapidapi-host": "v3.football.api-sports.io"
+        }
+
+        response = requests.get(url, headers=headers, params=querystring)
+        return response.json()
