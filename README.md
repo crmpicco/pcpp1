@@ -24,3 +24,6 @@ Notes for the Python PCPP1 course and exam
 ### Events
 - [x] bind
 - [ ] unbind 
+
+### Other
+- [ ] StringVar / IntVar

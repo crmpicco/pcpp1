@@ -24,13 +24,13 @@ else:
 root_window = tk.Tk()
 root_window.title("Rangers FC fixtures")
 
-header = tk.Label(root_window, text="Search Rangers FC fixtures", font=("Helvetica", 24))
-header.place(relx=0.5, rely=0.1, anchor="center")
-
-# configure the background image
+# configure the background image. This needs to go before the widgets
 background_image = PhotoImage(file="rangers-bg.png")
 background_label = tk.Label(root_window, image=background_image)
 background_label.place(relwidth=1, relheight=1)  # Make the label fill the entire window # noqa
+
+header = tk.Label(root_window, text="Search Rangers FC fixtures", font=("Helvetica", 24))
+header.place(relx=0.5, rely=0.1, anchor="center")
 
 # Get the screen dimensions
 screen_width = root_window.winfo_screenwidth()
@@ -66,7 +66,7 @@ def team_entry_widget_focus_out(event):
 
 
 # grid layout
-team_entry = tk.Entry(grid_frame, fg="grey")
+team_entry = tk.Entry(root_window, fg="grey")
 team_entry.insert(0, "Enter team name")  # some placeholder text
 team_entry.bind("<FocusIn>", team_entry_widget_focus_in)
 team_entry.bind("<FocusOut>", team_entry_widget_focus_out)
