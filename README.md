@@ -27,3 +27,5 @@ Notes for the Python PCPP1 course and exam
 
 ### Other
 - [ ] StringVar / IntVar
+- [x] Command binding
+- [x] messagebox

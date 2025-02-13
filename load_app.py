@@ -1,7 +1,7 @@
 import sys
 import tkinter as tk
 import os
-from tkinter import PhotoImage
+from tkinter import PhotoImage, messagebox
 from football_api_lookup import FootballApi
 
 # grab the API key from the environment variables
@@ -72,8 +72,24 @@ team_entry.bind("<FocusIn>", team_entry_widget_focus_in)
 team_entry.bind("<FocusOut>", team_entry_widget_focus_out)
 team_entry.grid(row=0, column=1, padx=10, pady=10)
 
+def search_fixtures():
+    team_name = team_entry.get().strip()
+    if team_name == "" or team_name == "Enter team name":
+        messagebox.showwarning("Input Error", "Please enter a team name to search.")
+        return
+
+    search_results = FootballApi.search_fixtures(team_name, rangers_fixtures.get("response", []))
+    print(search_results)
+
+    # TODO: only show the alert/messagebox if there are no results
+    if isinstance(search_results, list):
+        results_text = "\n".join(search_results)
+        messagebox.showinfo("Search Results", results_text)
+    else:
+        messagebox.showinfo("No Results", search_results)
+
 # Search button
-search_button = tk.Button(grid_frame, text="Search for result")
+search_button = tk.Button(grid_frame, text="Search for result", command=search_fixtures)
 search_button.grid(row=1, column=1, padx=10, pady=10)
 
 switch = tk.IntVar()
