@@ -15,8 +15,6 @@ football_api_lookup = FootballApi(football_api_key)
 rangers_fixtures = football_api_lookup.get_fixtures(257, 2021)
 if rangers_fixtures and "response" in rangers_fixtures:
     print(rangers_fixtures["response"])
-    # for player in rangers_players["response"]:
-    #     print(player["player"]["name"])  # Print player name
 else:
     print("Error fetching player data.")
 
@@ -64,13 +62,15 @@ def team_entry_widget_focus_out(event):
         team_entry.insert(0, "Enter team name")
         team_entry.config(fg="grey")
 
+search_frame = tk.Frame(root_window)
+search_frame.place(relx=0.5, rely=0.5, anchor="center")
 
 # grid layout
-team_entry = tk.Entry(root_window, fg="grey")
+team_entry = tk.Entry(search_frame, fg="grey")
 team_entry.insert(0, "Enter team name")  # some placeholder text
 team_entry.bind("<FocusIn>", team_entry_widget_focus_in)
 team_entry.bind("<FocusOut>", team_entry_widget_focus_out)
-team_entry.grid(row=0, column=1, padx=10, pady=10)
+team_entry.grid(row=0, column=0, padx=10, pady=10)
 
 def search_fixtures():
     team_name = team_entry.get().strip()
@@ -81,29 +81,30 @@ def search_fixtures():
     search_results = FootballApi.search_fixtures(team_name, rangers_fixtures.get("response", []))
     print(search_results)
 
-    # TODO: only show the alert/messagebox if there are no results
-    if isinstance(search_results, list):
-        results_text = "\n".join(search_results)
-        messagebox.showinfo("Search Results", results_text)
+    if not isinstance(search_results, list) or not search_results:
+        messagebox.showinfo("No Results", f"No matching fixtures found for {team_name}")
     else:
-        messagebox.showinfo("No Results", search_results)
+        pass
+        # TODO: display the results in a table or another widget
+        # results_text = "\n".join(search_results)
+        # messagebox.showinfo("Search Results", results_text)
 
 # Search button
-search_button = tk.Button(grid_frame, text="Search for result", command=search_fixtures)
-search_button.grid(row=1, column=1, padx=10, pady=10)
+search_button = tk.Button(search_frame, text="Search for result", command=search_fixtures)
+search_button.grid(row=0, column=1, padx=10, pady=10)
 
 switch = tk.IntVar()
 switch.set(0)
 
-pack_frame = tk.Frame(root_window)
-pack_frame.grid(row=3, column=1, padx=10, pady=10)
+# pack_frame = tk.Frame(root_window)
+# pack_frame.grid(row=3, column=1, padx=10, pady=10)
 
-check_button = tk.Checkbutton(pack_frame, text="Check button", variable=switch)
-check_button.pack()
+check_button = tk.Checkbutton(search_frame, text="Check button", variable=switch)
+check_button.grid(row=1, column=0, padx=10, pady=10)
 
 # Create a close button which will destroy the window entirely
 close_button = tk.Button(
-    pack_frame,
+    search_frame,
     text="Close",
     command=root_window.destroy,
     bg=root_window.cget("background"),
@@ -111,7 +112,7 @@ close_button = tk.Button(
     highlightthickness=0,
     activebackground=root_window.cget("background")
 )
-close_button.pack(side="bottom", pady=20)
+close_button.grid(row=1, column=1, padx=10, pady=10)
 
 # Run the Tkinter event loop
 root_window.mainloop()

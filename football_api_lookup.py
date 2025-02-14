@@ -16,7 +16,12 @@ class FootballApi:
             "x-rapidapi-host": self.API_HOST
         }
 
-        response = requests.get(url, headers=headers, params=querystring)
+        try:
+            response = requests.get(url, headers=headers, params=querystring)
+        except Exception as e:
+            print(f"Error fetching fixtures: {e}")
+            return None
+
         return response.json()
 
 
