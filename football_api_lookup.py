@@ -29,6 +29,9 @@ class FootballApi:
     def search_fixtures(team_name, fixtures):
         matching_fixtures = []
 
+        print('fixtures')
+        print(fixtures)
+
         team_name = team_name.lower()
         for fixture in fixtures:
             home_team = fixture["teams"]["home"]["name"]
@@ -38,7 +41,14 @@ class FootballApi:
                 fixture_date = fixture["fixture"]["date"]
                 # fixture_time = fixture["fixture"]["time"]
                 fixture_result = fixture["goals"]
-                fixture_summary = f"{home_team} vs {away_team} on {fixture_date}. Result: {fixture_result}"
-                matching_fixtures.append(fixture_summary)
+                matching_fixtures.append({
+                    "home_team": home_team,
+                    "away_team": away_team,
+                    "fixture_date": fixture_date,
+                    "home_score": fixture_result["home"],
+                    "away_score": fixture_result["away"],
+                })
 
+        print('matching_fixtures')
+        print(matching_fixtures)
         return matching_fixtures

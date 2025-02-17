@@ -13,9 +13,7 @@ if not football_api_key:
 # Get the Rangers players
 football_api_lookup = FootballApi(football_api_key)
 rangers_fixtures = football_api_lookup.get_fixtures(257, 2021)
-if rangers_fixtures and "response" in rangers_fixtures:
-    print(rangers_fixtures["response"])
-else:
+if not rangers_fixtures and "response" not in rangers_fixtures:
     print("Error fetching player data.")
 
 # Create the main window
@@ -84,10 +82,20 @@ def search_fixtures():
     if not isinstance(search_results, list) or not search_results:
         messagebox.showinfo("No Results", f"No matching fixtures found for {team_name}")
     else:
-        pass
-        # TODO: display the results in a table or another widget
-        # results_text = "\n".join(search_results)
-        # messagebox.showinfo("Search Results", results_text)
+        # create table headers
+        headers = search_results[0]  # the first row is the header
+        for col_num, header in enumerate(headers):
+            header_label = tk.Label(frame_table, text=header, font=('Arial', 10, 'bold'), width=20, anchor="w", relief="solid")
+            header_label.grid(row=0, column=col_num)
+
+        # Display search results in table
+        # Iterate over search results and populate the table
+        for row_num, fixture in enumerate(search_results, start=1):
+            tk.Label(frame_table, text=fixture['home_team']).grid(row=row_num, column=0)
+            tk.Label(frame_table, text=fixture['away_team']).grid(row=row_num, column=1)
+            tk.Label(frame_table, text=fixture['fixture_date']).grid(row=row_num, column=2)
+            tk.Label(frame_table, text=fixture['home_score']).grid(row=row_num, column=3)
+            tk.Label(frame_table, text=fixture['away_score']).grid(row=row_num, column=4)
 
 # Search button
 search_button = tk.Button(search_frame, text="Search for result", command=search_fixtures)
@@ -96,8 +104,9 @@ search_button.grid(row=0, column=1, padx=10, pady=10)
 switch = tk.IntVar()
 switch.set(0)
 
-# pack_frame = tk.Frame(root_window)
-# pack_frame.grid(row=3, column=1, padx=10, pady=10)
+# Frame to hold the table
+frame_table = tk.Frame(root_window)
+frame_table.grid(row=2, column=0, padx=10, pady=10)
 
 check_button = tk.Checkbutton(search_frame, text="Check button", variable=switch)
 check_button.grid(row=1, column=0, padx=10, pady=10)
