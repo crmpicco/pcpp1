@@ -3,6 +3,7 @@ import tkinter as tk
 import os
 from tkinter import PhotoImage, messagebox
 from football_api_lookup import FootballApi
+from datetime import datetime
 
 # grab the API key from the environment variables
 football_api_key = os.environ.get("FOOTBALL_API_KEY")
@@ -26,7 +27,7 @@ background_label = tk.Label(root_window, image=background_image)
 background_label.place(relwidth=1, relheight=1)  # Make the label fill the entire window # noqa
 
 header = tk.Label(root_window, text="Search Rangers FC fixtures", font=("Helvetica", 24))
-header.place(relx=0.5, rely=0.1, anchor="center")
+header.grid(row=0, column=0, sticky="n", columnspan=2, padx=10, pady=10)
 
 # Get the screen dimensions
 screen_width = root_window.winfo_screenwidth()
@@ -45,6 +46,13 @@ root_window.geometry(f"{window_width}x{window_height}+{center_x}+{center_y}")
 # disable both horizontal and vertical resizing
 root_window.resizable(False, False)
 
+# Grid configuration for centering the widgets
+root_window.grid_rowconfigure(0, weight=0)  # Row for header, fixed size
+root_window.grid_rowconfigure(1, weight=1)  # Row for search form, should expand to fill space
+root_window.grid_rowconfigure(2, weight=1)  # Row for the table, should expand as well
+
+root_window.grid_columnconfigure(0, weight=1)  # Column for all widgets, should expand horizontally
+
 grid_frame = tk.Frame(root_window)
 grid_frame.grid(row=0, column=0, padx=10, pady=10)
 
@@ -61,7 +69,7 @@ def team_entry_widget_focus_out(event):
         team_entry.config(fg="grey")
 
 search_frame = tk.Frame(root_window)
-search_frame.place(relx=0.5, rely=0.5, anchor="center")
+search_frame.grid(row=1, column=0, padx=10, pady=10)
 
 # grid layout
 team_entry = tk.Entry(search_frame, fg="grey")
@@ -85,15 +93,21 @@ def search_fixtures():
         # create table headers
         headers = search_results[0]  # the first row is the header
         for col_num, header in enumerate(headers):
+            header = header.replace("_", " ").title()
             header_label = tk.Label(frame_table, text=header, font=('Arial', 10, 'bold'), width=20, anchor="w", relief="solid")
             header_label.grid(row=0, column=col_num)
 
         # Display search results in table
         # Iterate over search results and populate the table
         for row_num, fixture in enumerate(search_results, start=1):
+
+            fixture_date = fixture['fixture_date']
+            fixture_date = datetime.fromisoformat(fixture_date)
+            fixture_date = datetime.strftime(fixture_date, "%d %B %Y @ %I:%M %p")
+
             tk.Label(frame_table, text=fixture['home_team']).grid(row=row_num, column=0)
             tk.Label(frame_table, text=fixture['away_team']).grid(row=row_num, column=1)
-            tk.Label(frame_table, text=fixture['fixture_date']).grid(row=row_num, column=2)
+            tk.Label(frame_table, text=fixture_date).grid(row=row_num, column=2)
             tk.Label(frame_table, text=fixture['home_score']).grid(row=row_num, column=3)
             tk.Label(frame_table, text=fixture['away_score']).grid(row=row_num, column=4)
 
@@ -104,12 +118,8 @@ search_button.grid(row=0, column=1, padx=10, pady=10)
 switch = tk.IntVar()
 switch.set(0)
 
-# Frame to hold the table
-frame_table = tk.Frame(root_window)
-frame_table.grid(row=2, column=0, padx=10, pady=10)
-
-check_button = tk.Checkbutton(search_frame, text="Check button", variable=switch)
-check_button.grid(row=1, column=0, padx=10, pady=10)
+rangers_wins_only = tk.Checkbutton(search_frame, text="Rangers wins only", variable=switch)
+rangers_wins_only.grid(row=1, column=0, padx=10, pady=10)
 
 # Create a close button which will destroy the window entirely
 close_button = tk.Button(
@@ -122,6 +132,10 @@ close_button = tk.Button(
     activebackground=root_window.cget("background")
 )
 close_button.grid(row=1, column=1, padx=10, pady=10)
+
+# Frame to hold the table
+frame_table = tk.Frame(root_window)
+frame_table.grid(row=2, column=0, padx=10, pady=10, sticky="nsew")
 
 # Run the Tkinter event loop
 root_window.mainloop()
