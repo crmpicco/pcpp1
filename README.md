@@ -28,6 +28,6 @@ Notes for the Python PCPP1 course and exam
 - [ ] unbind 
 
 ### Other
-- [ ] StringVar / IntVar
+- [x] StringVar / IntVar
 - [x] Command binding
 - [x] messagebox

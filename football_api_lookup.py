@@ -7,7 +7,6 @@ class FootballApi:
     def __init__(self, api_key):
         self.api_key = api_key
 
-
     def get_fixtures(self, team_id, season):
         url = f"https://{self.API_HOST}/fixtures"
         querystring = {"team": team_id, "season": season}

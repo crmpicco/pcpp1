@@ -78,7 +78,7 @@ team_entry.bind("<FocusIn>", team_entry_widget_focus_in)
 team_entry.bind("<FocusOut>", team_entry_widget_focus_out)
 team_entry.grid(row=0, column=0, padx=10, pady=10)
 
-def search_fixtures():
+def search_fixtures(filter_rangers_wins):
     team_name = team_entry.get().strip()
     if team_name == "" or team_name == "Enter team name":
         messagebox.showwarning("Input Error", "Please enter a team name to search.")
@@ -86,6 +86,10 @@ def search_fixtures():
 
     search_results = FootballApi.search_fixtures(team_name, rangers_fixtures.get("response", []))
     print(search_results)
+
+    # Clear previous results in the table
+    for widget in frame_table.winfo_children():
+        widget.destroy()
 
     if not isinstance(search_results, list) or not search_results:
         messagebox.showinfo("No Results", f"No matching fixtures found for {team_name}")
@@ -105,20 +109,32 @@ def search_fixtures():
             fixture_date = datetime.fromisoformat(fixture_date)
             fixture_date = datetime.strftime(fixture_date, "%d %B %Y @ %I:%M %p")
 
+            home_team = fixture['home_team']
+            away_team = fixture['away_team']
+            home_score = fixture['home_score']
+            away_score = fixture['away_score']
+
+            # Check if we need to filter for Rangers wins
+            if filter_rangers_wins.get() == 1:
+                # Skip the fixture if Rangers didn't win (either as home or away)
+                if not ((home_team == "Rangers" and home_score > away_score) or
+                        (away_team == "Rangers" and away_score > home_score)):
+                    continue  # Skip to the next fixture if Rangers didn't win
+
             tk.Label(frame_table, text=fixture['home_team']).grid(row=row_num, column=0)
             tk.Label(frame_table, text=fixture['away_team']).grid(row=row_num, column=1)
             tk.Label(frame_table, text=fixture_date).grid(row=row_num, column=2)
             tk.Label(frame_table, text=fixture['home_score']).grid(row=row_num, column=3)
             tk.Label(frame_table, text=fixture['away_score']).grid(row=row_num, column=4)
 
+filter_rangers_wins = tk.IntVar()
+filter_rangers_wins.set(0)
+
 # Search button
-search_button = tk.Button(search_frame, text="Search for result", command=search_fixtures)
+search_button = tk.Button(search_frame, text="Search for result", command=lambda: search_fixtures(filter_rangers_wins))
 search_button.grid(row=0, column=1, padx=10, pady=10)
 
-switch = tk.IntVar()
-switch.set(0)
-
-rangers_wins_only = tk.Checkbutton(search_frame, text="Rangers wins only", variable=switch)
+rangers_wins_only = tk.Checkbutton(search_frame, text="Rangers wins only", variable=filter_rangers_wins)
 rangers_wins_only.grid(row=1, column=0, padx=10, pady=10)
 
 # Create a close button which will destroy the window entirely
