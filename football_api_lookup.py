@@ -23,7 +23,6 @@ class FootballApi:
 
         return response.json()
 
-
     @staticmethod
     def search_fixtures(team_name, fixtures):
         matching_fixtures = []

@@ -15,8 +15,8 @@ Notes for the Python PCPP1 course and exam
 - [x] Button
 - [x] Entry
 - [x] ~~Text~~
-- [ ] Frame
-- [ ] Canvas
+- [x] Frame
+- [x] Canvas
 
 ### Geometry Managers
 - [x] pack

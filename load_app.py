@@ -20,6 +20,7 @@ if not rangers_fixtures and "response" not in rangers_fixtures:
 # Create the main window
 root_window = tk.Tk()
 root_window.title("Rangers FC fixtures")
+root_window.configure(bg='white')
 
 # configure the background image. This needs to go before the widgets
 background_image = PhotoImage(file="rangers-bg.png")
@@ -68,6 +69,7 @@ def team_entry_widget_focus_out(event):
         team_entry.insert(0, "Enter team name")
         team_entry.config(fg="grey")
 
+
 search_frame = tk.Frame(root_window)
 search_frame.grid(row=1, column=0, padx=10, pady=10)
 
@@ -77,6 +79,11 @@ team_entry.insert(0, "Enter team name")  # some placeholder text
 team_entry.bind("<FocusIn>", team_entry_widget_focus_in)
 team_entry.bind("<FocusOut>", team_entry_widget_focus_out)
 team_entry.grid(row=0, column=0, padx=10, pady=10)
+
+# Frame to hold the table, but hide it initially
+frame_table = tk.Frame(root_window)
+frame_table.grid_forget()
+
 
 def search_fixtures(filter_rangers_wins):
     team_name = team_entry.get().strip()
@@ -94,6 +101,9 @@ def search_fixtures(filter_rangers_wins):
     if not isinstance(search_results, list) or not search_results:
         messagebox.showinfo("No Results", f"No matching fixtures found for {team_name}")
     else:
+        # Make the table visible again after performing the search
+        frame_table.grid(row=2, column=0, padx=10, pady=10, sticky="nsew")
+
         # create table headers
         headers = search_results[0]  # the first row is the header
         for col_num, header in enumerate(headers):
@@ -117,8 +127,7 @@ def search_fixtures(filter_rangers_wins):
             # Check if we need to filter for Rangers wins
             if filter_rangers_wins.get() == 1:
                 # Skip the fixture if Rangers didn't win (either as home or away)
-                if not ((home_team == "Rangers" and home_score > away_score) or
-                        (away_team == "Rangers" and away_score > home_score)):
+                if not ((home_team == "Rangers" and home_score > away_score) or (away_team == "Rangers" and away_score > home_score)):
                     continue  # Skip to the next fixture if Rangers didn't win
 
             tk.Label(frame_table, text=fixture['home_team']).grid(row=row_num, column=0)
@@ -126,6 +135,7 @@ def search_fixtures(filter_rangers_wins):
             tk.Label(frame_table, text=fixture_date).grid(row=row_num, column=2)
             tk.Label(frame_table, text=fixture['home_score']).grid(row=row_num, column=3)
             tk.Label(frame_table, text=fixture['away_score']).grid(row=row_num, column=4)
+
 
 filter_rangers_wins = tk.IntVar()
 filter_rangers_wins.set(0)
@@ -149,9 +159,11 @@ close_button = tk.Button(
 )
 close_button.grid(row=1, column=1, padx=10, pady=10)
 
-# Frame to hold the table
-frame_table = tk.Frame(root_window)
-frame_table.grid(row=2, column=0, padx=10, pady=10, sticky="nsew")
+
+canvas = tk.Canvas(root_window, width=100, height=100)
+canvas.grid(row=0, column=0)
+canvas.create_oval(0, 0, 100, 100, fill="#1b458f")
+canvas.create_text(50, 50, text="Rangers FC", font=("Arial", 16))
 
 # Run the Tkinter event loop
 root_window.mainloop()
