@@ -1,10 +1,11 @@
-# PCPP1 Notes
+# PCPP1™ – Certified Professional Python Programmer Level 1
+ (Exam PCPP-32-10x) 
 
 ![PCPP1-Badge](https://images.credly.com/images/37e26478-d80c-43e8-80eb-ec492f3a26c1/image.png)
 
 ![pycodestyle](https://github.com/crmpicco/pcpp1_notes/actions/workflows/pycodestyle.yml/badge.svg)
 
-Notes for the Python PCPP1 course and exam
+Notes and small sample applications for the Python PCPP1 course and exam
 
 ## Tkinter
 ### Installation
@@ -31,3 +32,5 @@ Notes for the Python PCPP1 course and exam
 - [x] StringVar / IntVar
 - [x] Command binding
 - [x] messagebox
+- [x] PhotoImage
+- [x] destroy

@@ -17,7 +17,7 @@ rangers_fixtures = football_api_lookup.get_fixtures(257, 2021)
 if not rangers_fixtures and "response" not in rangers_fixtures:
     print("Error fetching player data.")
 
-# Create the main window
+# create the main window
 root_window = tk.Tk()
 root_window.title("Rangers FC fixtures")
 root_window.configure(bg='white')
@@ -27,8 +27,21 @@ background_image = PhotoImage(file="rangers-bg.png")
 background_label = tk.Label(root_window, image=background_image)
 background_label.place(relwidth=1, relheight=1)  # Make the label fill the entire window # noqa
 
-header = tk.Label(root_window, text="Search Rangers FC fixtures", font=("Helvetica", 24))
+header = tk.Label(
+    root_window,
+    text="Search Rangers FC Fixtures",
+    font=("Impact", 32),
+    bg=root_window.cget("background"),
+    fg="black",
+    highlightthickness=0,
+    bd=0
+)
 header.grid(row=0, column=0, sticky="n", columnspan=2, padx=10, pady=10)
+
+canvas = tk.Canvas(root_window, width=100, height=100, bg=root_window.cget("background"), highlightthickness=0)
+canvas.grid(row=1, column=0, pady=10, sticky="n")
+canvas.create_oval(0, 0, 100, 100, fill="#1b458f")
+canvas.create_text(50, 50, text="Rangers FC\n2021", font=("Arial", 12), anchor="center")
 
 # Get the screen dimensions
 screen_width = root_window.winfo_screenwidth()
@@ -49,8 +62,8 @@ root_window.resizable(False, False)
 
 # Grid configuration for centering the widgets
 root_window.grid_rowconfigure(0, weight=0)  # Row for header, fixed size
-root_window.grid_rowconfigure(1, weight=1)  # Row for search form, should expand to fill space
-root_window.grid_rowconfigure(2, weight=1)  # Row for the table, should expand as well
+root_window.grid_rowconfigure(1, weight=1)  # Row for a search form should expand to fill space
+root_window.grid_rowconfigure(2, weight=1)  # Row for the table should expand as well
 
 root_window.grid_columnconfigure(0, weight=1)  # Column for all widgets, should expand horizontally
 
@@ -75,7 +88,7 @@ search_frame.grid(row=1, column=0, padx=10, pady=10)
 
 # grid layout
 team_entry = tk.Entry(search_frame, fg="grey")
-team_entry.insert(0, "Enter team name")  # some placeholder text
+team_entry.insert(0, "Enter team name")
 team_entry.bind("<FocusIn>", team_entry_widget_focus_in)
 team_entry.bind("<FocusOut>", team_entry_widget_focus_out)
 team_entry.grid(row=0, column=0, padx=10, pady=10)
@@ -158,12 +171,6 @@ close_button = tk.Button(
     activebackground=root_window.cget("background")
 )
 close_button.grid(row=1, column=1, padx=10, pady=10)
-
-
-canvas = tk.Canvas(root_window, width=100, height=100)
-canvas.grid(row=0, column=0)
-canvas.create_oval(0, 0, 100, 100, fill="#1b458f")
-canvas.create_text(50, 50, text="Rangers FC", font=("Arial", 16))
 
 # Run the Tkinter event loop
 root_window.mainloop()
