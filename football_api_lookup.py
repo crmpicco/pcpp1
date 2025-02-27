@@ -47,6 +47,5 @@ class FootballApi:
                     "away_score": fixture_result["away"],
                 })
 
-        print('matching_fixtures')
         print(matching_fixtures)
         return matching_fixtures

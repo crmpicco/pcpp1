@@ -11,13 +11,15 @@ if not football_api_key:
     print("FOOTBALL_API_KEY environment variable not set")
     sys.exit(1)
 
-# Get the Rangers players
-football_api_lookup = FootballApi(football_api_key)
-rangers_fixtures = football_api_lookup.get_fixtures(257, 2021)
-if not rangers_fixtures and "response" not in rangers_fixtures:
-    print("Error fetching player data.")
+TEAM_ID = 257  # Rangers FC team ID
+SEASON = 2021  # 2021 season, only the 2021 season is supported on the Football API free tier
 
-# create the main window
+football_api_lookup = FootballApi(football_api_key)
+rangers_fixtures = football_api_lookup.get_fixtures(TEAM_ID, SEASON)
+if not rangers_fixtures and "response" not in rangers_fixtures:
+    print("Error fetching fixtures")
+
+# create the main window for the app
 root_window = tk.Tk()
 root_window.title("Rangers FC fixtures")
 root_window.configure(bg='white')
@@ -41,7 +43,7 @@ header.grid(row=0, column=0, sticky="n", columnspan=2, padx=10, pady=10)
 canvas = tk.Canvas(root_window, width=100, height=100, bg=root_window.cget("background"), highlightthickness=0)
 canvas.grid(row=1, column=0, pady=10, sticky="n")
 canvas.create_oval(0, 0, 100, 100, fill="#1b458f")
-canvas.create_text(50, 50, text="Rangers FC\n2021", font=("Arial", 12), anchor="center")
+canvas.create_text(50, 50, text="Rangers FC\n2021", font=("Arial", 12), anchor="center", justify="center")
 
 # Get the screen dimensions
 screen_width = root_window.winfo_screenwidth()
@@ -112,17 +114,24 @@ def search_fixtures(filter_rangers_wins):
         widget.destroy()
 
     if not isinstance(search_results, list) or not search_results:
-        messagebox.showinfo("No Results", f"No matching fixtures found for {team_name}")
+        messagebox.showinfo(
+            title="No Results",
+            message=f"There were no matching fixtures found for Rangers vs {team_name}"
+        )
     else:
         # Make the table visible again after performing the search
         frame_table.grid(row=2, column=0, padx=10, pady=10, sticky="nsew")
 
         # create table headers
         headers = search_results[0]  # the first row is the header
-        for col_num, header in enumerate(headers):
-            header = header.replace("_", " ").title()
-            header_label = tk.Label(frame_table, text=header, font=('Arial', 10, 'bold'), width=20, anchor="w", relief="solid")
-            header_label.grid(row=0, column=col_num)
+        # for col_num, header in enumerate(headers):
+        #     header = header.replace("_", " ").title()
+        header_label = tk.Label(frame_table, text="Home Team", font=('Arial', 10, 'bold'), width=20, anchor="w", relief="solid")
+        header_label.grid(row=0, column=0)
+        header_label = tk.Label(frame_table, text="Home Team", font=('Arial', 10, 'bold'), width=20, anchor="w", relief="solid")
+        header_label.grid(row=0, column=1)
+        header_label = tk.Label(frame_table, text="Home Team", font=('Arial', 10, 'bold'), width=20, anchor="w", relief="solid")
+        header_label.grid(row=0, column=2)
 
         # Display search results in table
         # Iterate over search results and populate the table
@@ -143,20 +152,21 @@ def search_fixtures(filter_rangers_wins):
                 if not ((home_team == "Rangers" and home_score > away_score) or (away_team == "Rangers" and away_score > home_score)):
                     continue  # Skip to the next fixture if Rangers didn't win
 
-            tk.Label(frame_table, text=fixture['home_team']).grid(row=row_num, column=0)
-            tk.Label(frame_table, text=fixture['away_team']).grid(row=row_num, column=1)
+            tk.Label(frame_table, text=f"{fixture['home_team']} ({fixture['home_score']})").grid(row=row_num, column=0)
+            tk.Label(frame_table, text=f"{fixture['away_team']} ({fixture['away_score']})").grid(row=row_num, column=1)
             tk.Label(frame_table, text=fixture_date).grid(row=row_num, column=2)
-            tk.Label(frame_table, text=fixture['home_score']).grid(row=row_num, column=3)
-            tk.Label(frame_table, text=fixture['away_score']).grid(row=row_num, column=4)
+            # tk.Label(frame_table, text=fixture['home_score']).grid(row=row_num, column=3)
+            # tk.Label(frame_table, text=fixture['away_score']).grid(row=row_num, column=4)
 
 
 filter_rangers_wins = tk.IntVar()
 filter_rangers_wins.set(0)
 
-# Search button
+# the Search button to trigger the search of fixtures (needs to be a lambda because command does not support arguments)
 search_button = tk.Button(search_frame, text="Search for result", command=lambda: search_fixtures(filter_rangers_wins))
 search_button.grid(row=0, column=1, padx=10, pady=10)
 
+# a checkbox to filter for Rangers wins only
 rangers_wins_only = tk.Checkbutton(search_frame, text="Rangers wins only", variable=filter_rangers_wins)
 rangers_wins_only.grid(row=1, column=0, padx=10, pady=10)
 
