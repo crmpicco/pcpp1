@@ -22,7 +22,7 @@ Notes and small sample applications for the Python PCPP1 course and exam
 ### Geometry Managers
 - [x] pack
 - [x] grid
-- [ ] place
+- [x] place
 
 ### Events
 - [x] bind

@@ -40,8 +40,14 @@ header = tk.Label(
 )
 header.grid(row=0, column=0, sticky="n", columnspan=2, padx=10, pady=10)
 
+# top right and top left circles
 canvas = tk.Canvas(root_window, width=100, height=100, bg=root_window.cget("background"), highlightthickness=0)
-canvas.grid(row=1, column=0, pady=10, sticky="n")
+canvas.place(relx=0.98, y=10, anchor="ne")
+canvas.create_oval(0, 0, 100, 100, fill="#1b458f")
+canvas.create_text(50, 50, text="Rangers FC\n2021", font=("Arial", 12), anchor="center", justify="center")
+
+canvas = tk.Canvas(root_window, width=100, height=100, bg=root_window.cget("background"), highlightthickness=0)
+canvas.place(relx=0.02, y=10, anchor="nw")
 canvas.create_oval(0, 0, 100, 100, fill="#1b458f")
 canvas.create_text(50, 50, text="Rangers FC\n2021", font=("Arial", 12), anchor="center", justify="center")
 
