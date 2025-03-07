@@ -4,6 +4,7 @@ import os
 from tkinter import PhotoImage, messagebox
 from football_api_lookup import FootballApi
 from datetime import datetime
+import webbrowser
 
 # grab the API key from the environment variables
 football_api_key = os.environ.get("FOOTBALL_API_KEY")
@@ -115,7 +116,7 @@ def search_fixtures(filter_rangers_wins):
     search_results = FootballApi.search_fixtures(team_name, rangers_fixtures.get("response", []))
     print(search_results)
 
-    # Clear previous results in the table
+    # clear previous results in the table
     for widget in frame_table.winfo_children():
         widget.destroy()
 
@@ -124,47 +125,49 @@ def search_fixtures(filter_rangers_wins):
             title="No Results",
             message=f"There were no matching fixtures found for Rangers vs {team_name}"
         )
-    else:
-        # Make the table visible again after performing the search
-        frame_table.grid(row=2, column=0, padx=10, pady=10, sticky="nsew")
+        return
 
-        # create table headers
-        headers = search_results[0]  # the first row is the header
-        # for col_num, header in enumerate(headers):
-        #     header = header.replace("_", " ").title()
-        header_label = tk.Label(frame_table, text="Home Team", font=('Arial', 10, 'bold'), width=20, anchor="w", relief="solid")
-        header_label.grid(row=0, column=0)
-        header_label = tk.Label(frame_table, text="Home Team", font=('Arial', 10, 'bold'), width=20, anchor="w", relief="solid")
-        header_label.grid(row=0, column=1)
-        header_label = tk.Label(frame_table, text="Home Team", font=('Arial', 10, 'bold'), width=20, anchor="w", relief="solid")
-        header_label.grid(row=0, column=2)
+    # make the table visible again after performing the search
+    frame_table.grid(row=2, column=0, padx=10, pady=10, sticky="nsew")
 
-        # Display search results in table
-        # Iterate over search results and populate the table
-        for row_num, fixture in enumerate(search_results, start=1):
+    # configure grid columns to have equal width (33% each)
+    frame_table.columnconfigure(0, weight=1, minsize=100)
+    frame_table.columnconfigure(1, weight=1, minsize=100)
+    frame_table.columnconfigure(2, weight=1, minsize=100)
 
-            fixture_date = fixture['fixture_date']
-            fixture_date = datetime.fromisoformat(fixture_date)
-            fixture_date = datetime.strftime(fixture_date, "%d %B %Y @ %I:%M %p")
+    # create table headers
+    header_label = tk.Label(frame_table, text="Home Team", font=('Arial', 10, 'bold'), anchor="w", relief="solid")
+    header_label.grid(row=0, column=0)
+    header_label = tk.Label(frame_table, text="Away Team", font=('Arial', 10, 'bold'), anchor="w", relief="solid")
+    header_label.grid(row=0, column=1)
+    header_label = tk.Label(frame_table, text="Date", font=('Arial', 10, 'bold'), anchor="w", relief="solid")
+    header_label.grid(row=0, column=2)
 
-            home_team = fixture['home_team']
-            away_team = fixture['away_team']
-            home_score = fixture['home_score']
-            away_score = fixture['away_score']
+    # display search results in table by iterating over the search results and populate the table
+    for row_num, fixture in enumerate(search_results, start=1):
 
-            # Check if we need to filter for Rangers wins
-            if filter_rangers_wins.get() == 1:
-                # Skip the fixture if Rangers didn't win (either as home or away)
-                if not ((home_team == "Rangers" and home_score > away_score) or (away_team == "Rangers" and away_score > home_score)):
-                    continue  # Skip to the next fixture if Rangers didn't win
+        fixture_date = fixture['fixture_date']
+        fixture_date = datetime.fromisoformat(fixture_date)
+        fixture_date = datetime.strftime(fixture_date, "%d %B %Y @ %I:%M %p")
 
-            tk.Label(frame_table, text=f"{fixture['home_team']} ({fixture['home_score']})").grid(row=row_num, column=0)
-            tk.Label(frame_table, text=f"{fixture['away_team']} ({fixture['away_score']})").grid(row=row_num, column=1)
-            tk.Label(frame_table, text=fixture_date).grid(row=row_num, column=2)
-            # tk.Label(frame_table, text=fixture['home_score']).grid(row=row_num, column=3)
-            # tk.Label(frame_table, text=fixture['away_score']).grid(row=row_num, column=4)
+        home_team = fixture['home_team']
+        away_team = fixture['away_team']
+        home_score = fixture['home_score']
+        away_score = fixture['away_score']
+
+        # check if we need to filter for Rangers wins
+        if filter_rangers_wins.get() == 1:
+            # Skip the fixture if Rangers didn't win (either as home or away)
+            if not ((home_team == "Rangers" and home_score > away_score)
+                    or (away_team == "Rangers" and away_score > home_score)):
+                continue  # Skip to the next fixture if Rangers didn't win
+
+        tk.Label(frame_table, text=f"{fixture['home_team']} ({fixture['home_score']})").grid(row=row_num, column=0)
+        tk.Label(frame_table, text=f"{fixture['away_team']} ({fixture['away_score']})").grid(row=row_num, column=1)
+        tk.Label(frame_table, text=fixture_date).grid(row=row_num, column=2)
 
 
+# variable to store whether the user wants to filter for Rangers wins
 filter_rangers_wins = tk.IntVar()
 filter_rangers_wins.set(0)
 
@@ -187,6 +190,9 @@ close_button = tk.Button(
     activebackground=root_window.cget("background")
 )
 close_button.grid(row=1, column=1, padx=10, pady=10)
+
+# hit the forward slash key for an easter egg
+root_window.bind("<slash>", lambda _: webbrowser.open("https://youtu.be/XitegYosG8s"))
 
 # Run the Tkinter event loop
 root_window.mainloop()

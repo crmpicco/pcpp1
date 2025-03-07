@@ -45,6 +45,8 @@ class FootballApi:
                     "fixture_date": fixture_date,
                     "home_score": fixture_result["home"],
                     "away_score": fixture_result["away"],
+                    "home_logo": fixture["teams"]["home"]["logo"],
+                    "away_logo": fixture["teams"]["away"]["logo"]
                 })
 
         print(matching_fixtures)
