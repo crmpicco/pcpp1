@@ -161,8 +161,10 @@ def search_fixtures(filter_rangers_wins):
         # check if we need to filter for Rangers wins
         if filter_rangers_wins.get() == 1:
             # Skip the fixture if Rangers didn't win (either as home or away)
-            if not ((home_team == "Rangers" and home_score > away_score)
-                or (away_team == "Rangers" and away_score > home_score)):
+            if not (
+                (home_team == "Rangers" and home_score > away_score)
+                or (away_team == "Rangers" and away_score > home_score)
+            ):
                 continue  # Skip to the next fixture if Rangers didn't win
 
         tk.Label(frame_table, text=f"{fixture['home_team']} ({fixture['home_score']})").grid(row=row_num, column=0)
