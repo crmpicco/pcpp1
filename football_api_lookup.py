@@ -27,9 +27,6 @@ class FootballApi:
     def search_fixtures(team_name, fixtures):
         matching_fixtures = []
 
-        print('fixtures')
-        print(fixtures)
-
         team_name = team_name.lower()
         for fixture in fixtures:
             home_team = fixture["teams"]["home"]["name"]
@@ -37,7 +34,6 @@ class FootballApi:
 
             if team_name in home_team.lower() or team_name in away_team.lower():
                 fixture_date = fixture["fixture"]["date"]
-                # fixture_time = fixture["fixture"]["time"]
                 fixture_result = fixture["goals"]
                 matching_fixtures.append({
                     "home_team": home_team,
@@ -49,5 +45,4 @@ class FootballApi:
                     "away_logo": fixture["teams"]["away"]["logo"]
                 })
 
-        print(matching_fixtures)
         return matching_fixtures

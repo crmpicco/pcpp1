@@ -102,6 +102,9 @@ team_entry.bind("<FocusIn>", team_entry_widget_focus_in)
 team_entry.bind("<FocusOut>", team_entry_widget_focus_out)
 team_entry.grid(row=0, column=0, padx=10, pady=10)
 
+# automatically set focus on the team entry widget after 5 seconds
+root_window.after(5000, lambda: team_entry.focus_set())
+
 # Frame to hold the table, but hide it initially
 frame_table = tk.Frame(root_window)
 frame_table.grid_forget()
@@ -187,12 +190,17 @@ close_button = tk.Button(
     bg=root_window.cget("background"),
     bd=0,
     highlightthickness=0,
-    activebackground=root_window.cget("background")
+    activebackground=root_window.cget("background"),
+    activeforeground="dark blue"
 )
 close_button.grid(row=1, column=1, padx=10, pady=10)
 
-# hit the forward slash key for an easter egg
-root_window.bind("<slash>", lambda _: webbrowser.open("https://youtu.be/XitegYosG8s"))
+def open_easter_egg(event):
+    webbrowser.open("https://youtu.be/XitegYosG8s")
+    root_window.unbind("<slash>")  # unbind the event on the forward slash so it doesn't trigger again
+
+# hit the forward slash key for an Easter egg ;)
+root_window.bind("<slash>", open_easter_egg)
 
 # Run the Tkinter event loop
 root_window.mainloop()

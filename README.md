@@ -20,13 +20,13 @@ Notes and small sample applications for the Python PCPP1 course and exam
 - [x] Canvas
 
 ### Geometry Managers
-- [x] pack
-- [x] grid
-- [x] place
+- [x] pack - simple "box" layout. Stacks widgets vertically or horizontally. Good for simple layouts. Uses `side='top'`, `side='bottom'` etc...
+- [x] grid - uses rows and columns, like a table. Best for forms and structured layouts. Uses `row=x`, `column=y` etc...
+- [x] place - places widgets at exact x and y coordinates. Not recommended for responsive UIs. Uses `.place(x=X, y=Y)`.
 
 ### Events
 - [x] bind
-- [ ] unbind 
+- [x] unbind 
 
 ### Other
 - [x] StringVar / IntVar
