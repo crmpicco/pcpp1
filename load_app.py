@@ -162,8 +162,7 @@ def search_fixtures(filter_rangers_wins):
         if filter_rangers_wins.get() == 1:
             # Skip the fixture if Rangers didn't win (either as home or away)
             if not (
-                (home_team == "Rangers" and home_score > away_score)
-                or (away_team == "Rangers" and away_score > home_score)
+                (home_team == "Rangers" and home_score > away_score) or (away_team == "Rangers" and away_score > home_score)
             ):
                 continue  # Skip to the next fixture if Rangers didn't win
 
