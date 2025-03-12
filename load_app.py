@@ -63,7 +63,7 @@ window_height = 800
 center_x = int((screen_width / 2) - (window_width / 2))
 center_y = int((screen_height / 2) - (window_height / 2))
 
-# position the window in the center of the screen
+# position the window in the centre of the screen
 root_window.geometry(f"{window_width}x{window_height}+{center_x}+{center_y}")
 
 # disable both horizontal and vertical resizing

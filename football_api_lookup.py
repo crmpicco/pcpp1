@@ -1,13 +1,14 @@
 import requests
+from typing import List, Dict, Any
 
 
 class FootballApi:
-    API_HOST = "v3.football.api-sports.io"
+    API_HOST: str = "v3.football.api-sports.io"
 
-    def __init__(self, api_key):
+    def __init__(self, api_key: str) -> None:
         self.api_key = api_key
 
-    def get_fixtures(self, team_id, season):
+    def get_fixtures(self, team_id: int, season: int) -> dict:
         url = f"https://{self.API_HOST}/fixtures"
         querystring = {"team": team_id, "season": season}
         headers = {
@@ -19,12 +20,12 @@ class FootballApi:
             response = requests.get(url, headers=headers, params=querystring)
         except Exception as e:
             print(f"Error fetching fixtures: {e}")
-            return None
+            return {}
 
         return response.json()
 
     @staticmethod
-    def search_fixtures(team_name, fixtures):
+    def search_fixtures(team_name: str, fixtures: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         matching_fixtures = []
 
         team_name = team_name.lower()
