@@ -1,5 +1,5 @@
 # PCPP1™ – Certified Professional Python Programmer Level 1
- (Exam PCPP-32-10x) 
+ (Exam [PCPP-32-10x](https://pythoninstitute.org/pcpp1-exam-syllabus)) 
 
 ![PCPP1-Badge](https://images.credly.com/images/37e26478-d80c-43e8-80eb-ec492f3a26c1/image.png)
 
