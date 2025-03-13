@@ -12,12 +12,12 @@ Notes and small sample applications for the Python PCPP1 course and exam
 `brew install python-tk@3.12` # Install Tkinter on macOS
 
 ### Widgets
-- [x] Label
-- [x] Button
-- [x] Entry
+- [x] **Label** - not clickable, no `command` attribute or callback functionality
+- [x] **Button** - has a `command` attribute that is a callback function
+- [x] **Entry**
 - [x] ~~Text~~
-- [x] Frame
-- [x] Canvas
+- [x] **Frame** - not clickable, no `command` attribute or callback functionality
+- [x] **Canvas**
 
 ### Geometry Managers
 - [x] pack - simple "box" layout. Stacks widgets vertically or horizontally. Good for simple layouts. Uses `side='top'`, `side='bottom'` etc...
@@ -25,7 +25,7 @@ Notes and small sample applications for the Python PCPP1 course and exam
 - [x] place - places widgets at exact x and y coordinates. Not recommended for responsive UIs. Uses `.place(x=X, y=Y)`.
 
 ### Events
-- [x] bind
+- [x] bind / event handlers
 - [x] unbind 
 
 ### Other
@@ -34,3 +34,4 @@ Notes and small sample applications for the Python PCPP1 course and exam
 - [x] messagebox
 - [x] PhotoImage
 - [x] destroy
+- [x] config method
