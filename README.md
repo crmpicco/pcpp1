@@ -8,6 +8,7 @@
 Notes and small sample applications for the Python PCPP1 course and exam
 
 ## Tkinter
+
 ### Installation
 `brew install python-tk@3.12` # Install Tkinter on macOS
 
@@ -35,3 +36,7 @@ Notes and small sample applications for the Python PCPP1 course and exam
 - [x] PhotoImage
 - [x] destroy
 - [x] config method
+
+### Resources
+
+Data is retrieved from the free APIs at https://www.api-football.com/
