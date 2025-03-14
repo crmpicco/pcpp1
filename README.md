@@ -8,6 +8,7 @@
 Notes and small sample applications for the Python PCPP1 course and exam
 
 ## Tkinter
+![Rangers tkinter app](https://github.com/crmpicco/pcpp1/blob/main/rfc-tkinter.gif?raw=true)
 
 ### Installation
 `brew install python-tk@3.12` # Install Tkinter on macOS
