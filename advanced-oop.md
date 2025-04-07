@@ -20,3 +20,20 @@ match2 = Match(5)
 match3 = match1 + match2
 print(match3.rating)
 ```
+
+:duck: Duck typing - this is a type of polymorphism (i.e. "many forms") and allows objects of different types to be used interchangeably as long as they implement the same methods. Duck typing relies heavily on **dynamic typing**.
+```python
+class Car:
+    def start_engine(self):
+        print("Car engine started")
+
+class LawnMower:
+    def start_engine(self):
+        print("Lawn mower engine started")
+
+def ignite(machine):
+    machine.start_engine()  # this doesn't care what type 'machine' is
+
+ignite(Car())
+ignite(LawnMower())
+```
