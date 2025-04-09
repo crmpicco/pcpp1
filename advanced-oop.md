@@ -37,3 +37,14 @@ def ignite(machine):
 ignite(Car())
 ignite(LawnMower())
 ```
+
+`isinstance()` is used to check if an object is an instance of a specific class or its subclasses
+
+`issubclass()` is used to check if a class is a subclass of another class. Works with classes **only**
+
+### Encapsulation
+One of the fundamental principles of OOP. This is the concept of restricting access to certain parts of an object. In Python, this is done using private and protected attributes. 
+#### Private attributes 
+Prefixed with a double underscore `__` and are not accessible from outside the class. 
+#### Protected attributes 
+Prefixed with a single underscore `_` and are intended to be used only within the class and its subclasses.
