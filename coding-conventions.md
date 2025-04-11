@@ -12,7 +12,7 @@
 
 ## [Docstrings](https://peps.python.org/pep-0257/)
 * For one-liner docstrings, the closing `"""` should be on the same line
-* The `"""` that ends a multiline docstring should be on a line by itself
+* The `"""` that ends a multiline docstring should be on a line by itself. For consistency, always use triple double quotes around docstrings.
 ```python
 def process_records(records, target):
     """Process the records for the target provided."""

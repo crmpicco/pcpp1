@@ -48,3 +48,5 @@ One of the fundamental principles of OOP. This is the concept of restricting acc
 Prefixed with a double underscore `__` and are not accessible from outside the class. 
 #### Protected attributes 
 Prefixed with a single underscore `_` and are intended to be used only within the class and its subclasses.
+
+Class attributes are public by default

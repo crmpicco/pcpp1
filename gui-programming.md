@@ -7,6 +7,8 @@
 
 `<Motion>` is a special event that is triggered when the mouse is moved with a mouse button being held down. It can be used to bind a function to a mouse movement event.
 
+Event handlers interact with various components to capture and transform user input
+
 ### Widgets
 
 - `Entry` - a single-line text input field. It can be used to get user input. 
