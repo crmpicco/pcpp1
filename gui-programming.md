@@ -27,3 +27,13 @@ stadium = tk.Label(
     width=25,  # width and height are measured in text units
     height=25
 )
+```
+* `Frame` - a container widget that can hold other widgets. It can be used to group related widgets together.
+You can remove a frame from the main window using the `forget()` method.
+```python
+root = tk.Tk()
+root.title("Removing frame from the main window in Tkinter")
+ 
+frame = tk.Frame(root, width=200, height=100, bg="blue")
+frame.forget()
+```
