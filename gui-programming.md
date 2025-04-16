@@ -11,6 +11,21 @@ Event handlers interact with various components to capture and transform user in
 
 ### Widgets
 
+#### Positioning
+
+The placement of widgets in a window is determined by the geometry manager. They can be defined by x/y coordinates or with relative coordinates and anchor, e.g.
+```python
+# x/y coordinates (in pixels)
+import tkinter as tk
+xy_label = tk.Label(root, text="x/y coordinates")
+xy_label.place(x=100, y=100)
+```
+```python
+# relative coordinates (and anchor)
+import tkinter as tk
+relative_label = tk.Label(root, text="relative (anchored) coordinates")
+relative_label.place(relx=0.5, rely=0.5, anchor="center")
+```
 - `Entry` - a single-line text input field. It can be used to get user input. 
 ```python
 entry.insert(0, "Please enter your name")

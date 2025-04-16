@@ -1,6 +1,21 @@
 # Advanced Object-Oriented Programming
 
+## Assorted methods
 `__le__` - this method is used to implement less than or equal to comparisons. It should return `True` if the object is less than or equal to the other object, `False` otherwise.
+
+`__repr()__` - used to return a information-rich string representation of the object. This is useful for debugging and logging purposes. The string returned by `__repr__()` should be a valid Python expression that can be used to recreate the object, e.g.
+```python
+class Player:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def __repr__(self):
+        return f"Player(name={self.name!r}, age={self.age!r})"
+
+player = Player("James Tavernier", 33)
+print(repr(player))  # Player(name='James Tavernier', age=33)
+```
 
 `from abc import ABC, abstractmethod` - the `abc` module provides the `ABC` class that can be used to create abstract base classes. Abstract base classes are classes that are designed to be inherited from, but not instantiated. Abstract methods are methods that must be implemented by any concrete subclasses.
 
