@@ -36,3 +36,12 @@ while True:
     client_socket, client_address = server_socket.accept()    
     client_socket.sendall(b"Hello! You are connected.\n")
     client_socket.close()
+```
+
+## General
+
+### IP (Internet Protocol)
+- One of the lowest layers of the TCP/IP model
+- Doesn't guarantee that any of the sent datagrams/packets will reach the target
+- Doesn't guarantee that the datagrams/packets will be received in the same order they were sent
+- Doesn't guarantee that the datagrams/packets will be received at all or reach the target intact

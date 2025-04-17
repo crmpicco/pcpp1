@@ -26,6 +26,14 @@ import tkinter as tk
 relative_label = tk.Label(root, text="relative (anchored) coordinates")
 relative_label.place(relx=0.5, rely=0.5, anchor="center")
 ```
+
+#### Styling
+`background` or `bg` - the background colour of the widget
+
+`selectforeground` - the colour of the text when selected
+
+`activebackground` - the background colour of the widget when it is active/under the cursor
+ 
 - `Entry` - a single-line text input field. It can be used to get user input. 
 ```python
 entry.insert(0, "Please enter your name")
