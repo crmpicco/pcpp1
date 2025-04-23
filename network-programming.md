@@ -38,6 +38,25 @@ while True:
     client_socket.close()
 ```
 
+`socket.connect()` - used to connect a socket to a remote address. You need to pass the address and port of the server you want to connect to **as a tuple**.
+
+`socket.recv()` - used to receive data from a socket. It is commonly used in client-server applications to receive data from a server. It takes one argument which specifies the maximum number of bytes to receive in a single call.
+```python
+import socket
+
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server_address = ('localhost', 8443)
+client_socket.connect(server_address)
+
+# send a message to the server
+message = 'Ahoy hoy, server!'
+client_socket.sendall(message.encode('utf-8'))
+
+# receive data from the server (up to 1024 bytes, you can change this value to receive more bytes in a single call)
+data = client_socket.recv(1024)
+print('Received from server:', data.decode('utf-8'))
+```
+
 ## General
 
 ### IP (Internet Protocol)

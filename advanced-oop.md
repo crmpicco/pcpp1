@@ -65,3 +65,8 @@ Prefixed with a double underscore `__` and are not accessible from outside the c
 Prefixed with a single underscore `_` and are intended to be used only within the class and its subclasses.
 
 Class attributes are public by default
+
+## Exceptions
+`__cause__` - when an exception is _explicitly chained_ using the from keyword, the original exception object is assigned to the `__cause__` attribute of the new exception.
+
+Implictly chained exceptions occir when an exception is raised inside another exception's `except` block. The new exception becomes the `__context__` of the original exception.
