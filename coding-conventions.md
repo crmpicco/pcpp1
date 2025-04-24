@@ -10,6 +10,10 @@
 * Function and Method arguments - Always use `self` for the first argument to instance methods and `cls` for the first argument to class methods.
 * Constants - Constants are usually defined on a module level and written in all capital letters with underscores separating words, e.g. `BUCKET_NAME` and `THRESHOLD`.
 
+### Types
+#### Informational
+Informational PEPs describe a Python design issue, or provide general guidelines or information to the Python community. Some examples of informational PEPs are [PEP-20](https://peps.python.org/pep-0020/) (The Zen of Python), and [PEP-257](https://peps.python.org/pep-0257/) (Docstring conventions).
+
 ## [Docstrings](https://peps.python.org/pep-0257/)
 * For one-liner docstrings, the closing `"""` should be on the same line
 * The `"""` that ends a multiline docstring should be on a line by itself. For consistency, always use triple double quotes around docstrings.
