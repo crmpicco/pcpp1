@@ -57,14 +57,19 @@ ignite(LawnMower())
 
 `issubclass()` is used to check if a class is a subclass of another class. Works with classes **only**
 
-### Encapsulation
+## Encapsulation
 One of the fundamental principles of OOP. This is the concept of restricting access to certain parts of an object. In Python, this is done using private and protected attributes. 
-#### Private attributes 
+### Private attributes 
 Prefixed with a double underscore `__` and are not accessible from outside the class. 
-#### Protected attributes 
+### Protected attributes 
 Prefixed with a single underscore `_` and are intended to be used only within the class and its subclasses.
 
 Class attributes are public by default
+
+## Inheritance
+Single inheritance - a class can inherit from only one parent class. This is the most common type of inheritance in Python.
+
+Multiple inheritance - a class can inherit from multiple parent classes. This is less common and can lead to complex class hierarchies. This can also lead to MRO (Method Resolution Order) issues which Python solves using the C3 linearisation algorithm.
 
 ## Exceptions
 `__cause__` - when an exception is _explicitly chained_ using the from keyword, the original exception object is assigned to the `__cause__` attribute of the new exception.

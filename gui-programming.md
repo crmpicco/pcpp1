@@ -60,3 +60,8 @@ root.title("Removing frame from the main window in Tkinter")
 frame = tk.Frame(root, width=200, height=100, bg="blue")
 frame.forget()
 ```
+You can also use the `destroy()` method to destroy a frame and all its children. The difference between `forget()` and `destroy()` is that `forget()` removes the widget from the window but keeps it in memory, while `destroy()` removes the widget **permanently** from the window and frees up the memory.
+```python
+frame = tk.Frame(root, width=200, height=100, bg="blue")
+frame.destroy()
+```
