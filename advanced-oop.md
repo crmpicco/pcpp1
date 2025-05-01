@@ -3,7 +3,7 @@
 ## Assorted methods
 `__le__` - this method is used to implement less than or equal to comparisons. It should return `True` if the object is less than or equal to the other object, `False` otherwise.
 
-`__repr()__` - used to return a information-rich string representation of the object. This is useful for debugging and logging purposes. The string returned by `__repr__()` should be a valid Python expression that can be used to recreate the object, e.g.
+`__repr()__` - used to return an information-rich string representation of the object. This is useful for debugging and logging purposes. The string returned by `__repr__()` should be a valid Python expression that can be used to recreate the object, e.g.
 ```python
 class Player:
     def __init__(self, name, age):
@@ -72,6 +72,33 @@ Single inheritance - a class can inherit from only one parent class. This is the
 Multiple inheritance - a class can inherit from multiple parent classes. This is less common and can lead to complex class hierarchies. This can also lead to MRO (Method Resolution Order) issues which Python solves using the C3 linearisation algorithm.
 
 ## Exceptions
-`__cause__` - when an exception is _explicitly chained_ using the from keyword, the original exception object is assigned to the `__cause__` attribute of the new exception.
+`__cause__` - when an exception is _explicitly chained_ using the `from` keyword, the original exception object is assigned to the `__cause__` attribute of the new exception.
 
-Implictly chained exceptions occir when an exception is raised inside another exception's `except` block. The new exception becomes the `__context__` of the original exception.
+Implicitly chained exceptions occur when an exception is raised inside another exception's `except` block. The new exception becomes the `__context__` of the original exception.
+
+## [pickle](https://docs.python.org/3/library/pickle.html)
+The `pickle` module is used to serialise and deserialise Python objects. The `pickle` package is a good option for serialising single Python objects into a byte stream.
+```python
+import pickle
+
+class Stadium:
+    def __init__(self, name, capacity):
+        self.name = name
+        self.capacity = capacity
+
+    def greet(self):
+        return f"Welcome to {self.name}. I hold {self.capacity} spectators."
+
+stadium = Stadium("Ibrox", 51000)
+
+# serialise the object to a file
+with open("ibrox.pkl", "wb") as file:
+    pickle.dump(stadium, file)
+
+# deserialise the object from the file we just created 
+with open("ibrox.pkl", "rb") as file:
+    loaded_stadium = pickle.load(file)
+
+# use the deserialised object
+print(loaded_stadium.greet())
+```
