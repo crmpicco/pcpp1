@@ -65,3 +65,13 @@ You can also use the `destroy()` method to destroy a frame and all its children.
 frame = tk.Frame(root, width=200, height=100, bg="blue")
 frame.destroy()
 ```
+* `Listbox` - a widget that displays a list of items. It can be used to display a list of options to the user. You can use the `insert()` method to add items to the listbox.
+```python
+# specify that only one item can be selected at a time
+hof_gers = tk.Listbox(root, selectmode=tk.SINGLE)
+hof_gers.pack()
+ 
+for item in ["Laudrup", "McCoist", "Albertz", "Ferguson"]:
+    # insert the item at the END of the listbox
+    hof_gers.insert(tk.END, item)
+```

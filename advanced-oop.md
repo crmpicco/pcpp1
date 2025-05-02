@@ -57,6 +57,9 @@ ignite(LawnMower())
 
 `issubclass()` is used to check if a class is a subclass of another class. Works with classes **only**
 
+#### Subclassing
+By subclassing the built-ins in Python you can modify only the parts that you intend to modify, while all remaining parts behave as good old built-ins.
+
 ## Encapsulation
 One of the fundamental principles of OOP. This is the concept of restricting access to certain parts of an object. In Python, this is done using private and protected attributes. 
 ### Private attributes 
