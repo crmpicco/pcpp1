@@ -1,9 +1,11 @@
 # Advanced Object-Oriented Programming
 
 ## Assorted methods
+Magic methods - begin and end with double underscores. They are also known as dunder (**d**ouble **under**score) methods.
+
 `__le__` - this method is used to implement less than or equal to comparisons. It should return `True` if the object is less than or equal to the other object, `False` otherwise.
 
-`__repr()__` - used to return an information-rich string representation of the object. This is useful for debugging and logging purposes. The string returned by `__repr__()` should be a valid Python expression that can be used to recreate the object, e.g.
+`__repr()__` - used to return an information-rich string representation of the object. This is useful for debugging and logging purposes. The string returned by `__repr__()` should be a valid Python expression that can be used to recreate the object e.g.
 ```python
 class Player:
     def __init__(self, name, age):
@@ -16,7 +18,19 @@ class Player:
 player = Player("James Tavernier", 33)
 print(repr(player))  # Player(name='James Tavernier', age=33)
 ```
+## Assorted attributes
+`__dict__` - this attribute is a dictionary that contains the object's attributes and their values. It is useful for debugging and introspection purposes. You can use it to see all the attributes of an object and their values.
+```python
+class Performer:
+    def __init__(self, name, weight):
+        self.name = name
+        self.weight = weight
 
+performer = Performer("John Cena", 251)
+
+print(performer.__dict__)
+# {'name': 'John Cena', 'weight': 251}
+```
 `from abc import ABC, abstractmethod` - the `abc` module provides the `ABC` class that can be used to create abstract base classes. Abstract base classes are classes that are designed to be inherited from, but not instantiated. Abstract methods are methods that must be implemented by any concrete subclasses.
 
 `@abstractmethod` - this decorator is used to mark a method as abstract. Abstract methods must be implemented by any concrete subclasses.
@@ -58,7 +72,7 @@ ignite(LawnMower())
 `issubclass()` is used to check if a class is a subclass of another class. Works with classes **only**
 
 #### Subclassing
-By subclassing the built-ins in Python you can modify only the parts that you intend to modify, while all remaining parts behave as good old built-ins.
+By subclassing the built-ins in Python, you can modify only the parts that you intend to modify, while all remaining parts behave as good old built-ins.
 
 ## Encapsulation
 One of the fundamental principles of OOP. This is the concept of restricting access to certain parts of an object. In Python, this is done using private and protected attributes. 

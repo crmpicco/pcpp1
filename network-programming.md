@@ -56,7 +56,18 @@ client_socket.sendall(message.encode('utf-8'))
 data = client_socket.recv(1024)
 print('Received from server:', data.decode('utf-8'))
 ```
+`socket.getservbyport()` - used to get the service name associated with a port number. It takes two arguments: the port number and the protocol name (e.g. `tcp` or `udp`).
+```python
+import socket
 
+service = socket.getservbyport(80, 'tcp')
+print(f"Service on TCP port 80: {service}")
+# http
+
+service = socket.getservbyport(53, 'udp')
+print(f"Service on UDP port 53: {service}")
+# domain
+```
 ## General
 
 ### IP (Internet Protocol)
