@@ -23,7 +23,7 @@ def process_records(records, target):
     pass
 ```
 
-Strings - single-quoted strings and double-quoted strings are the same in Python. When a string contains single or double quote characters use the other one to avoid backslashes in the string.
+Strings - single-quoted strings and double-quoted strings are the same in Python. When a string contains single or double quote characters, use the other one to avoid backslashes in the string.
 ```python
 name = "Stéphane Guivarc'h"  # :white_check_mark: No need for backslash
 comment = 'He said, "Hello Hello!"'  # :white_check_mark: No need for backslash

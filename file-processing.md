@@ -8,7 +8,7 @@ The sqllite3 module provides a lightweight disk-based database that doesn't requ
 ```python
 import sqlite3
 
-# connect to a SQLite database (creates one if it doesn't exist)
+# connect to an SQLite database (creates one if it doesn't exist)
 conn = sqlite3.connect('prowrestling.db')
  
 cursor = conn.cursor()
@@ -35,7 +35,7 @@ conn.close()
 ## Logging
 The [logging](https://docs.python.org/3/library/logging.html) module is used to log messages from a program. It is useful for debugging and tracking the execution of a program. The logging module provides a way to configure different log levels, such as `DEBUG`, `INFO`, `WARNING`, `ERROR`, and `CRITICAL`.
 
-`LogRecord` - an object that holds all the metadata about the logging event (level, filename, line number etc.)
+`LogRecord` - an object that holds all the metadata about the logging event (level, filename, line number, etc.)
 
 ```python
 import logging

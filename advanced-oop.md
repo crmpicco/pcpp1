@@ -50,14 +50,17 @@ match3 = match1 + match2
 print(match3.rating)
 ```
 
-:duck: Duck typing - this is a type of polymorphism (i.e. "many forms") and allows objects of different types to be used interchangeably as long as they implement the same methods. Duck typing relies heavily on **dynamic typing**.
+### :duck: Duck typing
+This is a type of polymorphism (i.e. "many forms") and allows objects of different types to be used interchangeably as long as they implement the same methods. Duck typing relies heavily on **dynamic typing**. Duck typing focuses on an object's _behaviour_ rather than its class or explicit type. If two different classes have a `start_engine()` method then they can both be used as if they are "machines" because the calling code only cares that the `start_engine()` method exists.
 ```python
 class Car:
-    def start_engine(self):
+    @staticmethod
+    def start_engine():
         print("Car engine started")
 
 class LawnMower:
-    def start_engine(self):
+    @staticmethod
+    def start_engine():
         print("Lawn mower engine started")
 
 def ignite(machine):
