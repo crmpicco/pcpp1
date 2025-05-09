@@ -14,6 +14,34 @@ import json
 club = {"club": "Rangers", "year_founded": 1872, "city": "Glasgow"}
 club_info = json.dumps(club)
 ```
+Python objects converted to their JSON equivalents:
+
+| Python  | JSON   | 
+|---------|--------|
+| `int`   | Number |
+| `str`   | String |
+| `True`  | true   |
+| `False` | false  |
+
+```python
+import json
+
+f1_data = {
+    "laps": 58,                 
+    "circuit": "Monza",         
+    "safety_car": True,         
+    "red_flag": False           
+}
+
+json_output = json.dumps(f1_data, indent=2)
+print(json_output)
+#{
+#  "laps": 58,
+#  "circuit": "Monza",
+#  "safety_car": true,
+#  "red_flag": false
+#}
+```
 
 ## socket
 The `socket` module provides access to the BSD socket interface. It is used to create network connections and communicate over the network.
@@ -68,6 +96,19 @@ service = socket.getservbyport(53, 'udp')
 print(f"Service on UDP port 53: {service}")
 # domain
 ```
+## XML
+The `xml.etree.ElementTree` module provides a simple and efficient way to parse and create XML documents. It is part of Python's standard library.
+
+`attrib` - a dictionary that contains the attributes of an XML element.
+
+```python
+import xml.etree.ElementTree as et
+
+event_element = et.Element('event')
+print(type(event_element.attrib))
+# prints # <class 'dict'>
+```
+
 ## General
 
 ### IP (Internet Protocol)
