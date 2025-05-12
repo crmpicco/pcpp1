@@ -5,7 +5,7 @@ Magic methods - begin and end with double underscores. They are also known as du
 
 `__le__` - this method is used to implement less than or equal to comparisons. It should return `True` if the object is less than or equal to the other object, `False` otherwise.
 
-`__repr()__` - used to return an information-rich string representation of the object. This is useful for debugging and logging purposes. The string returned by `__repr__()` should be a valid Python expression that can be used to recreate the object e.g.
+`__repr()__` - used to return an information-rich string representation of the object. This is useful for debugging and logging purposes and is **developer-oriented**. The string returned by `__repr__()` should be a valid Python expression that can be used to recreate the object e.g.
 ```python
 class Player:
     def __init__(self, name, age):
@@ -17,6 +17,19 @@ class Player:
 
 player = Player("James Tavernier", 33)
 print(repr(player))  # Player(name='James Tavernier', age=33)
+```
+`__str__` - used to return a human-readable string representation of the object. This is useful for displaying the object to the user and is **user-oriented**. The string returned by `__str__()` should be easy to read and understand e.g.
+```python
+class HouseShow:
+    def __init__(self, name, attendance):
+        self.name = name
+        self.attendance = attendance
+
+    def __str__(self):
+        return f"{self.name} had a turnout of ${self.attendance})"
+
+show = HouseShow("Insurrextion", 17000)
+print(show) # Output: Insurrextion had a turnout of 17000
 ```
 ## Assorted attributes
 `__dict__` - this attribute is a dictionary that contains the object's attributes and their values. It is useful for debugging and introspection purposes. You can use it to see all the attributes of an object and their values.
@@ -121,4 +134,21 @@ with open("ibrox.pkl", "rb") as file:
 
 # use the deserialised object
 print(loaded_stadium.greet())
+```
+
+## Closures
+A closure is a function that retains access to its lexical scope, even when the function is executed outside that scope. This means that the inner function can access variables from the outer function even after the outer function has finished executing. They also provide data hiding because the enclosed variables are accessible only through the closure's methods.
+```python
+def golf_score_tracker(player_name):
+    score = { 'strokes': 0 }  # mutable object
+
+    def add_strokes(strokes):
+        score['strokes'] += strokes
+        return f"{player_name} now has {score['strokes']} strokes"
+
+    return add_strokes
+
+tiger = golf_score_tracker("Tiger Woods")
+print(tiger(4))  # Tiger Woods now has 4 strokes.
+print(tiger(3))  # Tiger Woods now has 7 strokes.
 ```

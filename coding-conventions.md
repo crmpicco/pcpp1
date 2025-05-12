@@ -13,6 +13,8 @@
 ### Types
 #### Informational
 Informational PEPs describe a Python design issue, or provide general guidelines or information to the Python community. Some examples of informational PEPs are [PEP-20](https://peps.python.org/pep-0020/) (The Zen of Python), and [PEP-257](https://peps.python.org/pep-0257/) (Docstring conventions).
+#### Standards Track
+Standards Track PEPs describes a new feature or implementation in Python. They include a specification and a rationale for the change. An examples of Standards Track PEPs is [PEP-621](https://peps.python.org/pep-0621/).
 
 ## [Docstrings](https://peps.python.org/pep-0257/)
 * For one-liner docstrings, the closing `"""` should be on the same line
