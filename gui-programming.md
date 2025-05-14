@@ -75,3 +75,4 @@ for item in ["Laudrup", "McCoist", "Albertz", "Ferguson"]:
     # insert the item at the END of the listbox
     hof_gers.insert(tk.END, item)
 ```
+* `Canvas` - a widget that can be used to draw shapes, images, and text. Tkinter does not support 3D graphics. For complex 3D graphics, libraries such as [PyOpenGL](https://pyopengl.sourceforge.net/) and [Visualisation Toolkit (VTK)](https://pypi.org/project/vtk/) would be more suitable.

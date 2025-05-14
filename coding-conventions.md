@@ -16,6 +16,14 @@ Informational PEPs describe a Python design issue, or provide general guidelines
 #### Standards Track
 Standards Track PEPs describes a new feature or implementation in Python. They include a specification and a rationale for the change. An examples of Standards Track PEPs is [PEP-621](https://peps.python.org/pep-0621/).
 
+### [Sections](https://peps.python.org/pep-0001/#what-belongs-in-a-successful-pep)
+#### Abstract
+A short summary and description of the technical issue being addressed.
+#### Preamble
+[RFC 2822](https://datatracker.ietf.org/doc/html/rfc2822.html) headers, including the title, author, metadata and status of the PEP.
+#### Open Issues
+Ideas related to the PEP that are not yet resolved. This section is optional.
+
 ## [Docstrings](https://peps.python.org/pep-0257/)
 * For one-liner docstrings, the closing `"""` should be on the same line
 * The `"""` that ends a multiline docstring should be on a line by itself. For consistency, always use triple double quotes around docstrings.
