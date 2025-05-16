@@ -62,7 +62,48 @@ match2 = Match(5)
 match3 = match1 + match2
 print(match3.rating)
 ```
+### Properties
 
+The old-style way for assigning a property to a class would be to use `property`:
+```python
+class Swagman:
+    def __init__(self, weight_kg):
+        self._weight_kg = weight_kg
+
+    def get_weight(self):
+        return self._weight_kg
+
+    def set_weight(self, value):
+        if value > 0:
+            self._weight_kg = value
+        else:
+            raise ValueError("Weight must be a positive number.")
+
+    weight = property(get_weight, set_weight)
+
+bushwalker = Swagman(75)
+bushwalker.weight = 112  # after a few too many meat pies
+```
+The modern-style way to assign a property to a class would be to use the `@property` decorator:
+```python
+class Swagman:
+    def __init__(self, weight_kg):
+        self._weight_kg = weight_kg
+
+    @property
+    def weight(self):
+        return self._weight_kg
+
+    @weight.setter
+    def weight(self, value):
+        if value > 0:
+            self._weight_kg = value
+        else:
+            raise ValueError("Weight must be a positive number.")
+
+bushwalker = Swagman(70)
+bushwalker.weight = 78
+```
 ### :duck: Duck typing
 This is a type of polymorphism (i.e. "many forms") and allows objects of different types to be used interchangeably as long as they implement the same methods. Duck typing relies heavily on **dynamic typing**. Duck typing focuses on an object's _behaviour_ rather than its class or explicit type. If two different classes have a `start_engine()` method then they can both be used as if they are "machines" because the calling code only cares that the `start_engine()` method exists.
 ```python
