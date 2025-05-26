@@ -10,6 +10,12 @@
 * Function and Method arguments - Always use `self` for the first argument to instance methods and `cls` for the first argument to class methods.
 * Constants - Constants are usually defined on a module level and written in all capital letters with underscores separating words, e.g. `BUCKET_NAME` and `THRESHOLD`.
 
+### Maximum Line Length
+* :seven::two: characters for docstrings and comments
+* :seven::nine: characters for code
+
+The restricted line length originates from the early days of computing when terminals were limited to 80 characters per line. This convention is still followed in Python to ensure code readability across different editors and environments.
+
 ### Types
 #### Informational
 Informational PEPs describe a Python design issue, or provide general guidelines or information to the Python community. Some examples of informational PEPs are [PEP-20](https://peps.python.org/pep-0020/) (The Zen of Python), and [PEP-257](https://peps.python.org/pep-0257/) (Docstring conventions).
@@ -37,4 +43,25 @@ Strings - single-quoted strings and double-quoted strings are the same in Python
 ```python
 name = "Stéphane Guivarc'h"  # :white_check_mark: No need for backslash
 comment = 'He said, "Hello Hello!"'  # :white_check_mark: No need for backslash
+```
+
+### Type variables
+Type variables, from the [typing](https://docs.python.org/3/library/typing.html) module, are used to define generic types in Python. They do not exist at runtime and are implicitly established by [PEP-484](https://peps.python.org/pep-0484/). They allow you to create functions and classes that can work with different types while maintaining type safety. Type variable names should typically use CamelCase (CapWords), for example:
+#### Single-letter type variable
+```python
+from typing import TypeVar
+T = TypeVar('T')  # a type variable that can be any type
+
+def identity(value: T) -> T:
+    """Return the value unchanged."""
+    return value
+```
+#### Descriptive CamelCase type variable
+```python
+from typing import TypeVar
+UserId = TypeVar('UserId')
+
+def get_user(user_id: UserId):
+    """Retrieve a user by their ID."""
+    pass
 ```
