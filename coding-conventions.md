@@ -16,6 +16,18 @@
 
 The restricted line length originates from the early days of computing when terminals were limited to 80 characters per line. This convention is still followed in Python to ensure code readability across different editors and environments.
 
+### Comparisons
+Use `is` or `is not` when comparing to `None`. From a performance perspective, `is` is faster than `==` because it checks for object identity rather than value equality.
+```python
+crmpicco = None
+if crmpicco is None:
+    print("crmpicco is not here")
+
+the_champ = "cnation"
+if the_champ is not None:
+    print("the champ is here")
+``` 
+
 ### Types
 #### Informational
 Informational PEPs describe a Python design issue, or provide general guidelines or information to the Python community. Some examples of informational PEPs are [PEP-20](https://peps.python.org/pep-0020/) (The Zen of Python), and [PEP-257](https://peps.python.org/pep-0257/) (Docstring conventions).

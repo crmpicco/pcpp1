@@ -108,7 +108,30 @@ event_element = et.Element('event')
 print(type(event_element.attrib))
 # prints # <class 'dict'>
 ```
+`parse()` - used to parse an XML document from a string or a file. It returns an `ElementTree` object that represents the entire XML document.
 
+The following code parses an XML file and changes the tag of each child element to `football_competition`:
+```python
+import xml.etree.ElementTree as ET
+competitions = ET. parse('competitions.xml')
+root = competitions.getroot()
+for child in root:
+    child.tag = 'football_competition'
+```
+Sample XML file (`competitions.xml`):
+```xml
+<?xml version="1.0"?>
+<competitions>
+    <competition name="Scottish Cup">
+        <author>Scottish Football Association</author>
+        <year>1873</year>
+    </competition>
+    <competition name="Scottish League Cup">
+        <author>Scottish Professional Football League</author>
+        <year>1946</year>
+    </competition>
+</competitions>
+```
 ## General
 
 ### IP (Internet Protocol)
