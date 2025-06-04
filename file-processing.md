@@ -58,3 +58,24 @@ log_record = logging.LogRecord(
 # you can access the log message from the LogRecord using the msg attribute
 log_message = log_record.msg
 ```
+
+`basicConfig()` - used to configure the logging module. It sets the default log level and the format of the log messages. If you don't specify a level, then it will be set to `WARNING` by default.
+
+```python
+import logging
+logging.basicConfig()
+
+app_logger = logging.getLogger()
+app_logger.critical('CRITICAL - fix urgently!')
+# CRITICAL:root:CRITICAL - fix urgently!
+
+app_logger.error('ERROR - fix this!')
+# ERROR:root:ERROR - fix this!
+
+app_logger.warning('WARNING - something is not right')
+# WARNING:root:WARNING - something is not right
+
+# the following log lines are not displayed because the default log level is WARNING
+app_logger.info('INFO')
+app_logger.debug('DEBUG')
+```

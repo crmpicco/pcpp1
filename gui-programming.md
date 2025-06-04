@@ -3,9 +3,9 @@
 ## Tkinter
 
 ### Events
-`<Key>` is a special event that is triggered when any key is pressed. It can be used to bind a function to a key press event.
+`<Key>` is a special event triggered when any key is pressed. It can be used to bind a function to a key press event.
 
-`<Motion>` is a special event that is triggered when the mouse is moved with a mouse button being held down. It can be used to bind a function to a mouse movement event.
+`<Motion>` is a special event triggered when the mouse is moved with a mouse button being held down. It can be used to bind a function to a mouse movement event.
 
 Event handlers interact with various components to capture and transform user input
 
@@ -26,7 +26,11 @@ import tkinter as tk
 relative_label = tk.Label(root, text="relative (anchored) coordinates")
 relative_label.place(relx=0.5, rely=0.5, anchor="center")
 ```
-
+You can get the mouse cursor's coordinates from the event object by accessing the `x` and `y` properties of the event object, e.g.
+```python
+def click_icon(event):
+    print(f"Mouse clicked at ({event.x}, {event.y})")
+```
 #### Styling
 `background` or `bg` - the background colour of the widget
 
