@@ -1,19 +1,40 @@
 # Network Programming
 
 ## JSON
+### loads
 To parse a JSON string into a Python object, use the `json.loads()` method from the `json` module.
 ```python
 import json
 customer_info = '{"name": "Craig", "age": 41, "city": "Rockingham"}'
 customer = json.loads(customer_info)
 ```
-
+### dumps
 To convert Python data types into JSON data, use the `json.dumps()` method.
 ```python
 import json
 club = {"club": "Rangers", "year_founded": 1872, "city": "Glasgow"}
 club_info = json.dumps(club)
 ```
+You can't dump the content of an object by default, as the `json` module doesn't know how to convert it to JSON. You need to define a custom method to convert the object to a dictionary or use the `default` parameter of `json.dumps()` to specify a function that converts the object to a JSON-serializable format.
+```python
+import json
+
+class Competition:
+    def __init__(self, name, prize_money):
+        self.name = name
+        self.prize_money = prize_money
+
+def encode_competition(competition):
+    if isinstance(competition, Competition):
+        return competition.__dict__
+    
+    raise TypeError(f"Object of type {competition.__class__.__name__} is not JSON serializable")
+
+the_open = Competition("The Open Championship", 1860)
+print(json.dumps(the_open, default=encode_competition))
+# {"name": "The Open Championship", "prize_money": 1860}
+```    
+
 Python objects converted to their JSON equivalents:
 
 | Python  | JSON   | 
