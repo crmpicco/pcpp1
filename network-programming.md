@@ -35,14 +35,21 @@ print(json.dumps(the_open, default=encode_competition))
 # {"name": "The Open Championship", "prize_money": 1860}
 ```    
 
-Python objects converted to their JSON equivalents:
+Python objects [converted to their JSON equivalents](https://docs.python.org/3/library/json.html#json.JSONEncoder):
 
-| Python  | JSON   | 
-|---------|--------|
-| `int`   | Number |
-| `str`   | String |
-| `True`  | true   |
-| `False` | false  |
+| Python  | JSON                 | 
+|---------|----------------------|
+| `int`   | Number               |
+| `float` | Number               |
+| `list`  | Array                |
+| `dict`  | Object               |
+| `tuple` | Array                |
+| `list`  | Array                |
+| `str`   | String               |
+| `True`  | true                 |
+| `False` | false                |
+| `None`  | null                 |
+| `set`   | :x: Incompatible :x: |
 
 ```python
 import json
@@ -75,6 +82,7 @@ import socket
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # bind the socket to a specific address and port
+# the domain is typically not part of a socket itself, but rather it is used to resolve the IP address that the socket connects to
 server_socket.bind(('0.0.0.0', 8080))
 
 # start listening for incoming connections (max 5 clients in the queue)
@@ -89,7 +97,7 @@ while True:
 
 `socket.connect()` - used to connect a socket to a remote address. You need to pass the address and port of the server you want to connect to **as a tuple**.
 
-`socket.recv()` - used to receive data from a socket. It is commonly used in client-server applications to receive data from a server. It takes one argument which specifies the maximum number of bytes to receive in a single call.
+`socket.recv()` - used to receive data from a socket. It is commonly used in client-server applications to receive data from a server. It takes one argument which specifies the maximum number of bytes to receive in a single call. It will wait/block until it receives **at least one byte** or until a timeout or an error occurs. The return value of this method is a bytes object representing the data received.
 ```python
 import socket
 
@@ -117,15 +125,27 @@ service = socket.getservbyport(53, 'udp')
 print(f"Service on UDP port 53: {service}")
 # domain
 ```
+Clients - request services from servers. They initiate the connection to the server and send requests for data or services.
+
+Servers - provide services to clients. They listen for incoming connections and respond to client requests.
+
 ## XML
 The `xml.etree.ElementTree` module provides a simple and efficient way to parse and create XML documents. It is part of Python's standard library.
 
+`Element()` - used to create a new XML element.
+
+`SubElement()` - used to create a new sub-element under an existing element.
+
 `attrib` - a dictionary that contains the attributes of an XML element.
 
-```python
-import xml.etree.ElementTree as et
+`find()` - used to find a sub-element with a specific tag
 
-event_element = et.Element('event')
+`findall()` - used to find all sub-elements with a specific tag
+
+```python
+import xml.etree.ElementTree as ET
+
+event_element = ET.Element('event')
 print(type(event_element.attrib))
 # prints # <class 'dict'>
 ```
@@ -153,6 +173,52 @@ Sample XML file (`competitions.xml`):
     </competition>
 </competitions>
 ```
+
+### DTD
+**D**ocument **T**ype **D**efinition. It defines the structure and the legal elements and attributes of an XML document. It is used to validate the XML document against a set of rules.
+
+You can use internal or external DTD declarations.
+
+From a DTD point of view, all XML documents are made up of several building blocks:
+* Elements
+* Attributes
+* Entities
+* PCDATA (Parsed Character Data)
+* CDATA (Character Data)
+
+## [requests](https://requests.readthedocs.io/en/latest/)
+The `requests` module is a popular Python library for making HTTP requests. It provides a simple and intuitive API for sending HTTP requests and handling responses.
+
+`requests.Session()` - used to manage logins and persist cookies
+```python
+import requests
+
+session = requests.Session()
+
+login_payload = {
+    'username': 'johndoe1872',
+    'password': 'p4ssw0rd123'
+}
+session.post('https://example.com/login', data=login_payload)
+
+# then use the session to access protected pages that require authentication
+response = session.get('https://example.com/protected-page')
+print(response.text)
+```
+HTTP response headers can be taken from the `headers` attribute of the response object. The headers are returned as a dictionary-like object.
+```python
+import requests
+response = requests.get('https://api.example.com/data')
+print(response.headers)
+# {'Content-Type': 'application/json', 'Content-Length': '1234', ...}
+```
+| Header Name    | Description                                                              |
+|----------------|--------------------------------------------------------------------------|
+| Content-Type   | Describes the media type of the response body (e.g., `application/json`) |
+| Content-Length | Size of the response body in bytes                                       |
+| Server         | Indicates the software used by the origin server, e.g. `nginx`           |
+| Date           | Timestamp when the response was generated by the server                  |
+| Set-Cookie     | Sends cookies from the server to the client                              |
 ## General
 
 ### IP (Internet Protocol)
@@ -160,3 +226,19 @@ Sample XML file (`competitions.xml`):
 - Doesn't guarantee that any of the sent datagrams/packets will reach the target
 - Doesn't guarantee that the datagrams/packets will be received in the same order they were sent
 - Doesn't guarantee that the datagrams/packets will be received at all or reach the target intact
+
+### multiprocessing
+This is the only way to achieve true parallelism in Python.
+
+The `multiprocessing` module bypasses the Global Interpreter Lock (GIL) by using separate memory spaces and processes. Each process has its own Python interpreter and memory space, allowing multiple processes to run simultaneously on different CPU cores achieving **true parallelism**.
+
+`threading` vs `multiprocessing`:
+
+`threading` is for I/O-bound concurrency
+
+`multiprocessing` is for CPU-bound parallelism
+
+`queue.Queue` is thread-safe, meaning that multiple threads can safely add and remove items from the queue without causing data corruption or inconsistencies. Specifically designed for thread-safe communication. Safe to use across processes. However, the order in which items arrive is not guaranteed because the processes run in parallel.
+
+#### Global Interpreter Lock (GIL)
+The GIL is a mutex/lock used by CPython (the standard implementation of Python) to protect access to Python objects, preventing multiple threads from executing Python bytecodes at once. This means that even in a multithreaded program, only one thread can execute Python code at a time.

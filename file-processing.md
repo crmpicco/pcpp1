@@ -79,3 +79,15 @@ app_logger.warning('WARNING - something is not right')
 app_logger.info('INFO')
 app_logger.debug('DEBUG')
 ```
+
+A typical use of `LogRecord` when using threads:
+
+```python
+logging.basicConfig(format='%(asctime)s [%(levelname)s] [%(threadName)s] [PID:%(process)d] - %(message)s', level=logging.INFO)
+```
+
+## csv
+The `csv` module provides functionality to read and write CSV (Comma-Separated Values) files. It is part of Python's standard library.
+
+### Writing
+`csv.writer()` - creates a writer object that can write data to a CSV file. If you do not explicitly define the quoting parameter the default is `quoting=csv.QUOTE_MINIMAL`, which means that only fields containing special characters (like commas or quotes) will be quoted.
