@@ -244,6 +244,8 @@ Decorators are a way to modify or enhance the behaviour of functions or methods.
 
 Decorators allow you to create a read-only attribute
 
+The `property` function (`@property` decorator) returns a descriptor object.
+
 ```python
 def require_admin(func):
     def wrapper(user, *args, **kwargs):
@@ -513,6 +515,7 @@ Metaclasses are classes of classes.
 * can replace or modify attributes of classes
 * have the ability to control class creation by modifying or replacing it
 * has similarites to superclasses, but you want to use a metaclass when modifying or enforcing structure at the **class definition level** whereas a superclass is used for sharing logic or data across instances
+* the `__new__` method in a metaclass is a factory that is responsible for creating the actual class object. It runs before `__init__`.
 * they are utilised by frameworks such as [Django](https://www.djangoproject.com/) and [Flask](https://flask.palletsprojects.com/en/stable/)
 ```python
 class ScottishMeta(type):
@@ -565,6 +568,7 @@ Sets:
 * yields values lazily, meaning it produces each value only when requested and resumes execution from where it left off after each `yield`
 * When the generator is exhausted, it raises a `StopIteration` exception to signal that there are no more values to `yield`
 * If a generator function executes a `return` statement, it raises a `StopIteration` exception with the value specified in the `return` statement as its argument
+* `send(value)` - resumes the generator and sends a value that replaces the result of the current `yield` expression
 ```python
 def process_files():
     print("Opening file system")

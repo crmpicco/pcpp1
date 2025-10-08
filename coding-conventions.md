@@ -49,7 +49,7 @@ microsoft_azure = 3
 
 The restricted line length originates from the early days of computing when terminals were limited to 80 characters per line. This convention is still followed in Python to ensure code readability across different editors and environments.
 
-### Trailing commas
+### [Trailing commas](https://peps.python.org/pep-0008/#when-to-use-trailing-commas)
 Trailing commas are mandatory when making a tuple of one element, even although they appear redundant.
 ```python
 towns = ('Mauchline',)
@@ -159,7 +159,7 @@ def get_user(user_id: UserId):
 To make a class usable with a `with` statement, you need to implement the `__enter__()` and `__exit__()` methods. 
 
 * `__enter__()` - called when the block is entered
-* `__exit__()` - called when the block is exited. Always called even if an exception occurs inside the `with` block. This allows context managers to clean up resources.
+* `__exit__()` - called when the block is exited. Always called even if an exception occurs inside the `with` block. This allows context managers to clean up resources. When an exception is raised inside the `with` block, Python automatically calls `__exit__()`.
 
 ```python
 class APIConnection:

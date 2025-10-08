@@ -74,6 +74,11 @@ print(json_output)
 ## socket
 The `socket` module provides access to the BSD socket interface. It is used to create network connections and communicate over the network.
 
+It has three parts:
+1. Protocol
+2. Local address
+3. Local port
+
 `socket.accept()` - allows a server socket to accept requests from a client socket from another host.
 ```python
 import socket
@@ -125,6 +130,10 @@ service = socket.getservbyport(53, 'udp')
 print(f"Service on UDP port 53: {service}")
 # domain
 ```
+`SOCK_STREAM` - provides a reliable, connection-oriented byte stream. Used for TCP connections.
+
+`SOCK_DGRAM` - provides a connectionless, unreliable **d**ata**gram** service. Used for UDP connections.
+
 Clients - request services from servers. They initiate the connection to the server and send requests for data or services.
 
 Servers - provide services to clients. They listen for incoming connections and respond to client requests.
@@ -241,4 +250,7 @@ The `multiprocessing` module bypasses the Global Interpreter Lock (GIL) by using
 `queue.Queue` is thread-safe, meaning that multiple threads can safely add and remove items from the queue without causing data corruption or inconsistencies. Specifically designed for thread-safe communication. Safe to use across processes. However, the order in which items arrive is not guaranteed because the processes run in parallel.
 
 #### Global Interpreter Lock (GIL)
-The GIL is a mutex/lock used by CPython (the standard implementation of Python) to protect access to Python objects, preventing multiple threads from executing Python bytecodes at once. This means that even in a multithreaded program, only one thread can execute Python code at a time.
+The GIL is a mutex/lock used by CPython (the standard implementation of Python) to protect access to Python objects, simplify memory management, preventing multiple threads from executing Python bytecodes at once. This means that even in a multithreaded program, only one thread can execute Python code at a time.
+
+### ctypes
+`ctypes` serves as a foreign function library, enabling Python to wrap and call functions from compiled C libraries without writing C extension code.
