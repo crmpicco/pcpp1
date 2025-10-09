@@ -33,6 +33,9 @@ print(show) # Output: Insurrextion had a turnout of 17000
 ```
 `__doc__` - this attribute contains the docstring of the class or function. It is used to provide documentation for the class or function
 ```python
+"""
+Comments can go in here but they will be ignored and they won't be returned by __doc__
+"""
 def greet(name):
     """Say hello to the given person"""
     return f"Hello, {name}!"

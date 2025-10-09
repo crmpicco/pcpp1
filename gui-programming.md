@@ -51,7 +51,10 @@ def click_icon(event):
 
 `activebackground` - the background colour of the widget when it is active/under the cursor
  
-- `Entry` - a single-line text input field. It can be used to get user input. 
+- `Entry` - a single-line text input field. It can be used to get user input.
+
+- `entry.insert()` - used to insert text into the entry field at a specific position or set an initial value
+
 ```python
 entry.insert(0, "Please enter your name")
 entry.insert(5, "*****")
@@ -93,7 +96,7 @@ for item in ["Laudrup", "McCoist", "Albertz", "Ferguson"]:
     # insert the item at the END of the listbox
     hof_gers.insert(tk.END, item)
 ```
-* `Canvas` - a widget that can be used to draw shapes, images, and text. Tkinter does not support 3D graphics. For complex 3D graphics, libraries such as [PyOpenGL](https://pyopengl.sourceforge.net/) and [Visualisation Toolkit (VTK)](https://pypi.org/project/vtk/) would be more suitable.
+* `Canvas` - a widget that can be used to draw shapes, images, and text in a window. Tkinter does not support 3D graphics. For complex 3D graphics, libraries such as [PyOpenGL](https://pyopengl.sourceforge.net/) and [Visualisation Toolkit (VTK)](https://pypi.org/project/vtk/) would be more suitable.
 
 | Widget        | Description                                  | Clickable?                       |
 |---------------|----------------------------------------------|----------------------------------|
@@ -140,3 +143,15 @@ def on_button_click(event):
 button = tk.Button(root_window, text="Click Me")
 button.bind("<Button-1>", on_button_click)
 ```
+## messagebox
+There are eight types of messageboxes:
+1. showinfo
+2. showwarning
+3. showerror
+4. askquestion
+5. askokcancel
+6. askretrycancel
+7. askyesno
+8. askyesnocancel
+
+Messages boxes are modal and will return a subset of (True, False, OK, None, Yes, No) based on the user's selection

@@ -102,7 +102,7 @@ Standards Track PEPs describes a new feature or implementation in Python. They i
 
 ### [Sections](https://peps.python.org/pep-0001/#what-belongs-in-a-successful-pep)
 #### Abstract
-A short summary and description of the technical issue being addressed.
+A short (~200 word) summary and description of the technical issue being addressed.
 #### Preamble
 [RFC 2822](https://datatracker.ietf.org/doc/html/rfc2822.html) headers, including the title, author, metadata and status of the PEP.
 #### Open Issues
