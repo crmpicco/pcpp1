@@ -182,6 +182,11 @@ class Golfer:
 golfer = Golfer("Ernie Els", 0)
 golfer.age = 55  # :x: this raises an AttributeError
 ```
+`__hash__` - used to define a custom hash function for instances of a class
+
+`__delete__` - used in descriptors to define custom behaviour when an attribute is deleted
+
+`__del__` - this method is called when an object is about to be destroyed. It is useful for cleaning up resources, such as closing files or releasing locks. However, it is not guaranteed to be called immediately when an object goes out of scope, so it should not be relied upon for critical resource management.
 
 `super()` - used to call a method from a superclass. Can be used with single and multiple inheritance. Follows the MRO (Method Resolution Order) which can skip the immediate parent if multiple inheritance is in play. **Importantly, it does not always mean "direct parent".**
 
@@ -294,6 +299,7 @@ print(Config.debug)  # False
 Config.enable_debug()
 print(Config.debug)  # True
 ```
+`@staticmethod` - used to define a static method. Static methods are methods that do not take the instance or class as the first argument. They are similar to regular functions, but they are defined inside a class for organisational purposes. Static methods can be called on the class itself or on an instance of the class.
 
 ### Descriptors
 Descriptors are objects that define how attributes are accessed and modified. They are used to create properties, methods, and other attributes that have custom behaviour. Descriptors are defined by implementing the `__get__()`, `__set__()`, and `__delete__()` methods.
@@ -427,6 +433,11 @@ except Exception as e:
 `finally` - always executed after `try` and `except` blocks.
 
 :warning: **GOTCHA!** If a `finally` block contains a `return` it **overrides** any `return` from `try`, `except`, or `else`. 
+
+Tracebacks can be accessed using the `__traceback__` attribute of an exception object. This attribute contains a traceback object that represents the call stack at the point where the exception was raised. You can use the `traceback` module to format and print the traceback information.
+
+`traceback.print_tb()` - this function prints the traceback information to the console. It takes a traceback object as an argument and prints the call stack in a human-readable format.
+
 
 ## [pickle](https://docs.python.org/3/library/pickle.html)
 The `pickle` module is used to serialise and deserialise Python objects. The `pickle` package is a good option for serialising single Python objects into a byte stream.

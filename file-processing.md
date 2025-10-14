@@ -27,8 +27,9 @@ INSERT INTO promoters (name, age) VALUES ('Antonio Inoki', 68);
  
 cursor.executescript(sql_script)
  
-# commit changes and close the connection
+# save all changes made in the current transaction to the database
 conn.commit()
+# ...and close the connection
 conn.close()
 ```
 

@@ -33,7 +33,8 @@ def encode_competition(competition):
 the_open = Competition("The Open Championship", 1860)
 print(json.dumps(the_open, default=encode_competition))
 # {"name": "The Open Championship", "prize_money": 1860}
-```    
+```
+`json.dumps()` will convert an empty string to a valid JSON string format (empty string)
 
 Python objects [converted to their JSON equivalents](https://docs.python.org/3/library/json.html#json.JSONEncoder):
 
@@ -254,3 +255,10 @@ The GIL is a mutex/lock used by CPython (the standard implementation of Python) 
 
 ### ctypes
 `ctypes` serves as a foreign function library, enabling Python to wrap and call functions from compiled C libraries without writing C extension code.
+
+### Status codes
+HTTP 200 `OK` - successful requests that retrieve or update a resource
+
+HTTP 201 `Created` - successful requests that create a resource on the server
+
+HTTP 202 `Accepted` - the request has been accepted for processing, but the processing has not yet been completed

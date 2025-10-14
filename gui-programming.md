@@ -50,7 +50,10 @@ def click_icon(event):
 `selectforeground` - the colour of the text when selected
 
 `activebackground` - the background colour of the widget when it is active/under the cursor
- 
+
+tkinter does not provide a method for creating RGB colours directly. Colours in tkinter are usually represented with Hexadecimal colour codes, predefined colour names or custom colours.
+
+
 - `Entry` - a single-line text input field. It can be used to get user input.
 
 - `entry.insert()` - used to insert text into the entry field at a specific position or set an initial value

@@ -15,6 +15,8 @@ PEP-8 guidelines are a set of rules for formatting Python code to enhance readab
 * Function and Method arguments - Always use `self` for the first argument to instance methods and `cls` for the first argument to class methods.
 * Constants - Constants are usually defined on a module level and written in all capital letters with underscores separating words, e.g. `BUCKET_NAME` and `THRESHOLD`.
 
+PEP-8 does not deal with language design such as how to define new keywords/operators.
+
 Avoid extraneous whitespace in the following situations:
 * Immediately inside parentheses, brackets, or braces.
 ```python
