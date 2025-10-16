@@ -13,7 +13,7 @@
 
 `<Motion>` is a special event triggered when the mouse is moved with a mouse button being held down. It can be used to bind a function to a mouse movement event.
 
-Event handlers interact with various components to capture and transform user input
+Event handlers interact with various components to capture and transform user input. To add an event handler to a widget, you can use the `bind()` method of the widget. The `bind()` method takes two arguments: the event type and the function to be called when the event occurs.
 
 ### Widgets
 Widgets create the components of the user interface

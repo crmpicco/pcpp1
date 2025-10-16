@@ -186,7 +186,7 @@ golfer.age = 55  # :x: this raises an AttributeError
 
 `__delete__` - used in descriptors to define custom behaviour when an attribute is deleted
 
-`__del__` - this method is called when an object is about to be destroyed. It is useful for cleaning up resources, such as closing files or releasing locks. However, it is not guaranteed to be called immediately when an object goes out of scope, so it should not be relied upon for critical resource management.
+`__del__` - this method, also known as the destructor, is called when an object is about to be destroyed. It is useful for cleaning up resources, such as closing files or releasing locks. However, it is not guaranteed to be called immediately when an object goes out of scope, so it should not be relied upon for critical resource management.
 
 `super()` - used to call a method from a superclass. Can be used with single and multiple inheritance. Follows the MRO (Method Resolution Order) which can skip the immediate parent if multiple inheritance is in play. **Importantly, it does not always mean "direct parent".**
 
@@ -434,7 +434,7 @@ except Exception as e:
 
 :warning: **GOTCHA!** If a `finally` block contains a `return` it **overrides** any `return` from `try`, `except`, or `else`. 
 
-Tracebacks can be accessed using the `__traceback__` attribute of an exception object. This attribute contains a traceback object that represents the call stack at the point where the exception was raised. You can use the `traceback` module to format and print the traceback information.
+Tracebacks can be accessed using the `__traceback__` attribute of an exception object. This attribute contains a traceback object that represents the call stack at the point where the exception was raised. You can use the `traceback` module to format and print the traceback information. It holds interesting information that is useful when you want to store exception details in other objects.
 
 `traceback.print_tb()` - this function prints the traceback information to the console. It takes a traceback object as an argument and prints the call stack in a human-readable format.
 
